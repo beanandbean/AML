@@ -8,7 +8,11 @@
 
 #import "BBViewController.h"
 
+#import "BBAMLViewer.h"
+
 @interface BBViewController ()
+
+@property (strong, nonatomic) BBAMLViewer *amlViewer;
 
 @end
 
@@ -17,7 +21,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"aml"];
+    NSData *data = [NSData dataWithContentsOfFile:path options:0 error:nil];
+    self.amlViewer = [[BBAMLViewer alloc] initWithAMLData:data andParent:self.view];
+    [self.amlViewer view];
 }
 
 - (void)didReceiveMemoryWarning

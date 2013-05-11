@@ -19,6 +19,9 @@
 		2CE54B79173D1C0400CD4763 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE54B77173D1C0400CD4763 /* MainStoryboard_iPhone.storyboard */; };
 		2CE54B7C173D1C0400CD4763 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE54B7A173D1C0400CD4763 /* MainStoryboard_iPad.storyboard */; };
 		2CE54B7F173D1C0400CD4763 /* BBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE54B7E173D1C0400CD4763 /* BBViewController.m */; };
+		2CE54B86173D1E4E00CD4763 /* test.aml in Resources */ = {isa = PBXBuildFile; fileRef = 2CE54B85173D1E4E00CD4763 /* test.aml */; };
+		2CE54B89173D1EB200CD4763 /* BBAMLViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE54B88173D1EB200CD4763 /* BBAMLViewer.m */; };
+		2CE54B8C173D255900CD4763 /* BBAMLDocumentNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE54B8B173D255900CD4763 /* BBAMLDocumentNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,11 @@
 		2CE54B7B173D1C0400CD4763 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		2CE54B7D173D1C0400CD4763 /* BBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BBViewController.h; sourceTree = "<group>"; };
 		2CE54B7E173D1C0400CD4763 /* BBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BBViewController.m; sourceTree = "<group>"; };
+		2CE54B85173D1E4E00CD4763 /* test.aml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.aml; sourceTree = "<group>"; };
+		2CE54B87173D1EB200CD4763 /* BBAMLViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLViewer.h; sourceTree = "<group>"; };
+		2CE54B88173D1EB200CD4763 /* BBAMLViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLViewer.m; sourceTree = "<group>"; };
+		2CE54B8A173D255900CD4763 /* BBAMLDocumentNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLDocumentNode.h; sourceTree = "<group>"; };
+		2CE54B8B173D255900CD4763 /* BBAMLDocumentNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLDocumentNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,13 +93,17 @@
 		2CE54B65173D1C0400CD4763 /* AML */ = {
 			isa = PBXGroup;
 			children = (
+				2CE54B87173D1EB200CD4763 /* BBAMLViewer.h */,
+				2CE54B88173D1EB200CD4763 /* BBAMLViewer.m */,
 				2CE54B6E173D1C0400CD4763 /* BBAppDelegate.h */,
 				2CE54B6F173D1C0400CD4763 /* BBAppDelegate.m */,
-				2CE54B77173D1C0400CD4763 /* MainStoryboard_iPhone.storyboard */,
-				2CE54B7A173D1C0400CD4763 /* MainStoryboard_iPad.storyboard */,
 				2CE54B7D173D1C0400CD4763 /* BBViewController.h */,
 				2CE54B7E173D1C0400CD4763 /* BBViewController.m */,
+				2CE54B7A173D1C0400CD4763 /* MainStoryboard_iPad.storyboard */,
+				2CE54B77173D1C0400CD4763 /* MainStoryboard_iPhone.storyboard */,
 				2CE54B66173D1C0400CD4763 /* Supporting Files */,
+				2CE54B8A173D255900CD4763 /* BBAMLDocumentNode.h */,
+				2CE54B8B173D255900CD4763 /* BBAMLDocumentNode.m */,
 			);
 			path = AML;
 			sourceTree = "<group>";
@@ -99,6 +111,7 @@
 		2CE54B66173D1C0400CD4763 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2CE54B85173D1E4E00CD4763 /* test.aml */,
 				2CE54B67173D1C0400CD4763 /* AML-Info.plist */,
 				2CE54B68173D1C0400CD4763 /* InfoPlist.strings */,
 				2CE54B6B173D1C0400CD4763 /* main.m */,
@@ -168,6 +181,7 @@
 				2CE54B76173D1C0400CD4763 /* Default-568h@2x.png in Resources */,
 				2CE54B79173D1C0400CD4763 /* MainStoryboard_iPhone.storyboard in Resources */,
 				2CE54B7C173D1C0400CD4763 /* MainStoryboard_iPad.storyboard in Resources */,
+				2CE54B86173D1E4E00CD4763 /* test.aml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +195,8 @@
 				2CE54B6C173D1C0400CD4763 /* main.m in Sources */,
 				2CE54B70173D1C0400CD4763 /* BBAppDelegate.m in Sources */,
 				2CE54B7F173D1C0400CD4763 /* BBViewController.m in Sources */,
+				2CE54B89173D1EB200CD4763 /* BBAMLViewer.m in Sources */,
+				2CE54B8C173D255900CD4763 /* BBAMLDocumentNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
