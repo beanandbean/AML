@@ -8,16 +8,19 @@
 
 #import "BBAMLViewer.h"
 
-#import "BBAMLDocumentNode.h"
+#import "BBAMLNodeRoot.h"
+
+#import "BBAMLStyleSheetParser.h"
 
 @interface BBAMLViewer ()
 
-@property (weak, nonatomic) UIView *parent;
 @property (weak, nonatomic) BBAMLDocumentNode *current;
 
+@property (strong, nonatomic) UIView *rootView;
 @property (strong, nonatomic) NSData *data;
 @property (strong, nonatomic) NSXMLParser *parser;
-@property (strong, nonatomic) BBAMLDocumentNode *root;
+@property (strong, nonatomic) BBAMLNodeRoot *root;
+@property (strong, nonatomic) BBAMLStyleSheetParser *styleSheetParser;
 
 @end
 
@@ -37,16 +40,21 @@
 
 - (void)view {
     [self.parser parse];
-    [self.root logTree];
+    self.rootView = [self.root view];
+    if (self.rootView) {
+        [self.parent addSubview:self.rootView];
+    }
+    self.styleSheetParser = [[BBAMLStyleSheetParser alloc] initWithDocumentRoot:self.root];
 }
 
 #pragma mark - NSXMLParserDelegate Implement
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
     if (self.root) {
-        self.current = [self.current addChildWithName:elementName];
+        self.current = [self.current addChildWithName:elementName andAttributes:attributeDict];
     } else {
-        self.root = [[BBAMLDocumentNode alloc] initWithElementName:elementName andParent:nil];
+        self.root = [[BBAMLNodeRoot alloc] initWithElementName:elementName attributes:attributeDict andParent:nil];
+        self.root.viewer = self;
         self.current = self.root;
     }
 }
@@ -58,7 +66,7 @@
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     NSString *trimmed = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (![trimmed isEqualToString:@""]) {
-        self.current.innerText = trimmed;
+        self.current.innerText = [self.current.innerText stringByAppendingString:trimmed];
     }
 }
 

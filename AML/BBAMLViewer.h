@@ -10,6 +10,8 @@
 
 @interface BBAMLViewer : NSObject <NSXMLParserDelegate>
 
+@property (weak, nonatomic) UIView *parent;
+
 - (id)initWithAMLData:(NSData *)filename andParent:(UIView *)parent;
 
 - (void)view;

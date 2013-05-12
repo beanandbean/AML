@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C3900DA173E4DF600561DB4 /* BBAMLNodeRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900D9173E4DF600561DB4 /* BBAMLNodeRoot.m */; };
+		2C3900DD173E4E2500561DB4 /* BBAMLNodeMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900DC173E4E2500561DB4 /* BBAMLNodeMain.m */; };
+		2C3900E1173E4E4700561DB4 /* BBAMLNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900E0173E4E4700561DB4 /* BBAMLNodeView.m */; };
+		2C3900E4173E4E5300561DB4 /* BBAMLNodeInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900E3173E4E5300561DB4 /* BBAMLNodeInput.m */; };
+		2C3900E7173E4E6000561DB4 /* BBAMLNodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */; };
+		2C479EA7173F554900B53553 /* BBAMLStyleSheetParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */; };
 		2CE54B60173D1C0400CD4763 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE54B5F173D1C0400CD4763 /* UIKit.framework */; };
 		2CE54B62173D1C0400CD4763 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE54B61173D1C0400CD4763 /* Foundation.framework */; };
 		2CE54B64173D1C0400CD4763 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE54B63173D1C0400CD4763 /* CoreGraphics.framework */; };
@@ -25,6 +31,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C3900D8173E4DF600561DB4 /* BBAMLNodeRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLNodeRoot.h; sourceTree = "<group>"; };
+		2C3900D9173E4DF600561DB4 /* BBAMLNodeRoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLNodeRoot.m; sourceTree = "<group>"; };
+		2C3900DB173E4E2500561DB4 /* BBAMLNodeMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLNodeMain.h; sourceTree = "<group>"; };
+		2C3900DC173E4E2500561DB4 /* BBAMLNodeMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLNodeMain.m; sourceTree = "<group>"; };
+		2C3900DF173E4E4700561DB4 /* BBAMLNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLNodeView.h; sourceTree = "<group>"; };
+		2C3900E0173E4E4700561DB4 /* BBAMLNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLNodeView.m; sourceTree = "<group>"; };
+		2C3900E2173E4E5300561DB4 /* BBAMLNodeInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLNodeInput.h; sourceTree = "<group>"; };
+		2C3900E3173E4E5300561DB4 /* BBAMLNodeInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLNodeInput.m; sourceTree = "<group>"; };
+		2C3900E5173E4E6000561DB4 /* BBAMLNodeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLNodeButton.h; sourceTree = "<group>"; };
+		2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLNodeButton.m; sourceTree = "<group>"; };
+		2C479EA5173F554900B53553 /* BBAMLStyleSheetParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLStyleSheetParser.h; sourceTree = "<group>"; };
+		2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLStyleSheetParser.m; sourceTree = "<group>"; };
 		2CE54B5C173D1C0400CD4763 /* AML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AML.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE54B5F173D1C0400CD4763 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2CE54B61173D1C0400CD4763 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -63,6 +81,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C3900D7173E4DB700561DB4 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				2C3900D8173E4DF600561DB4 /* BBAMLNodeRoot.h */,
+				2C3900D9173E4DF600561DB4 /* BBAMLNodeRoot.m */,
+				2C3900DB173E4E2500561DB4 /* BBAMLNodeMain.h */,
+				2C3900DC173E4E2500561DB4 /* BBAMLNodeMain.m */,
+				2C3900DF173E4E4700561DB4 /* BBAMLNodeView.h */,
+				2C3900E0173E4E4700561DB4 /* BBAMLNodeView.m */,
+				2C3900E2173E4E5300561DB4 /* BBAMLNodeInput.h */,
+				2C3900E3173E4E5300561DB4 /* BBAMLNodeInput.m */,
+				2C3900E5173E4E6000561DB4 /* BBAMLNodeButton.h */,
+				2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */,
+			);
+			name = Nodes;
+			sourceTree = "<group>";
+		};
 		2CE54B53173D1C0400CD4763 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +128,10 @@
 		2CE54B65173D1C0400CD4763 /* AML */ = {
 			isa = PBXGroup;
 			children = (
+				2CE54B8A173D255900CD4763 /* BBAMLDocumentNode.h */,
+				2CE54B8B173D255900CD4763 /* BBAMLDocumentNode.m */,
+				2C479EA5173F554900B53553 /* BBAMLStyleSheetParser.h */,
+				2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */,
 				2CE54B87173D1EB200CD4763 /* BBAMLViewer.h */,
 				2CE54B88173D1EB200CD4763 /* BBAMLViewer.m */,
 				2CE54B6E173D1C0400CD4763 /* BBAppDelegate.h */,
@@ -101,9 +140,8 @@
 				2CE54B7E173D1C0400CD4763 /* BBViewController.m */,
 				2CE54B7A173D1C0400CD4763 /* MainStoryboard_iPad.storyboard */,
 				2CE54B77173D1C0400CD4763 /* MainStoryboard_iPhone.storyboard */,
+				2C3900D7173E4DB700561DB4 /* Nodes */,
 				2CE54B66173D1C0400CD4763 /* Supporting Files */,
-				2CE54B8A173D255900CD4763 /* BBAMLDocumentNode.h */,
-				2CE54B8B173D255900CD4763 /* BBAMLDocumentNode.m */,
 			);
 			path = AML;
 			sourceTree = "<group>";
@@ -197,6 +235,12 @@
 				2CE54B7F173D1C0400CD4763 /* BBViewController.m in Sources */,
 				2CE54B89173D1EB200CD4763 /* BBAMLViewer.m in Sources */,
 				2CE54B8C173D255900CD4763 /* BBAMLDocumentNode.m in Sources */,
+				2C3900DA173E4DF600561DB4 /* BBAMLNodeRoot.m in Sources */,
+				2C3900DD173E4E2500561DB4 /* BBAMLNodeMain.m in Sources */,
+				2C3900E1173E4E4700561DB4 /* BBAMLNodeView.m in Sources */,
+				2C3900E4173E4E5300561DB4 /* BBAMLNodeInput.m in Sources */,
+				2C3900E7173E4E6000561DB4 /* BBAMLNodeButton.m in Sources */,
+				2C479EA7173F554900B53553 /* BBAMLStyleSheetParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +373,7 @@
 				2CE54B84173D1C0400CD4763 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
