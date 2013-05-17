@@ -13,5 +13,8 @@
 @interface BBAMLNodeRoot : BBAMLDocumentNode
 
 @property (weak, nonatomic) BBAMLViewer *viewer;
+@property (strong, nonatomic) NSMutableString *styleSheet;
+
+- (void)reportStyleSheet:(NSString *)styleSheet;
 
 @end

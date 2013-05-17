@@ -22,4 +22,12 @@
     return self.nodeView;
 }
 
+- (void)reportStyleSheet:(NSString *)styleSheet {
+    if (self.styleSheet) {
+        [self.styleSheet appendString:styleSheet];
+    } else {
+        self.styleSheet = [styleSheet mutableCopy];
+    }
+}
+
 @end

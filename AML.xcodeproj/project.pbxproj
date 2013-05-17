@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C117CEE1746518100E4096D /* BBAMLNodeStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C117CED1746518100E4096D /* BBAMLNodeStyle.m */; };
 		2C3900DA173E4DF600561DB4 /* BBAMLNodeRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900D9173E4DF600561DB4 /* BBAMLNodeRoot.m */; };
 		2C3900DD173E4E2500561DB4 /* BBAMLNodeMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900DC173E4E2500561DB4 /* BBAMLNodeMain.m */; };
 		2C3900E1173E4E4700561DB4 /* BBAMLNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900E0173E4E4700561DB4 /* BBAMLNodeView.m */; };
@@ -31,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C117CEC1746518100E4096D /* BBAMLNodeStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLNodeStyle.h; sourceTree = "<group>"; };
+		2C117CED1746518100E4096D /* BBAMLNodeStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLNodeStyle.m; sourceTree = "<group>"; };
 		2C3900D8173E4DF600561DB4 /* BBAMLNodeRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLNodeRoot.h; sourceTree = "<group>"; };
 		2C3900D9173E4DF600561DB4 /* BBAMLNodeRoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLNodeRoot.m; sourceTree = "<group>"; };
 		2C3900DB173E4E2500561DB4 /* BBAMLNodeMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLNodeMain.h; sourceTree = "<group>"; };
@@ -94,6 +97,8 @@
 				2C3900E3173E4E5300561DB4 /* BBAMLNodeInput.m */,
 				2C3900E5173E4E6000561DB4 /* BBAMLNodeButton.h */,
 				2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */,
+				2C117CEC1746518100E4096D /* BBAMLNodeStyle.h */,
+				2C117CED1746518100E4096D /* BBAMLNodeStyle.m */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 				2C3900E4173E4E5300561DB4 /* BBAMLNodeInput.m in Sources */,
 				2C3900E7173E4E6000561DB4 /* BBAMLNodeButton.m in Sources */,
 				2C479EA7173F554900B53553 /* BBAMLStyleSheetParser.m in Sources */,
+				2C117CEE1746518100E4096D /* BBAMLNodeStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
