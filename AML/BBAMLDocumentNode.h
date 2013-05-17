@@ -24,7 +24,10 @@
 
 - (UIView *)view;
 
+- (BOOL)matchObjectPattern:(NSString *)pattern;
+
 - (BBAMLDocumentNode *)getElementById:(NSString *)nodeId;
+- (NSArray *)getElementsByPattern:(NSString *)pattern;
 
 - (void)log;
 - (void)logTree;

@@ -40,6 +40,24 @@
     return nil;
 }
 
+- (BOOL)matchObjectPattern:(NSString *)pattern {
+    NSString *trimmed = [pattern stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([trimmed isEqualToString:@"*"]) {
+        return YES;
+    } else if ([trimmed characterAtIndex:0] == '#') {
+        NSString *currentId = [self.attributes objectForKey:@"id"];
+        NSString *predictId = [trimmed substringFromIndex:1];
+        if ([currentId isEqualToString:predictId]) {
+            return YES;
+        }
+    } else {
+        if ([trimmed isEqualToString:self.name]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 - (BBAMLDocumentNode *)getElementById:(NSString *)nodeId {
     NSString *currentId = [self.attributes objectForKey:@"id"];
     if (currentId && [currentId isEqualToString:nodeId]) {
@@ -55,8 +73,45 @@
     }
 }
 
+- (NSArray *)getElementsByPattern:(NSString *)pattern {
+    NSString *trimmed = [pattern stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    NSString *current;
+    NSString *rest;
+    if ([trimmed characterAtIndex:0] == '/') {
+        current = @"main";
+        rest = [[trimmed substringFromIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    } else {
+        NSRange range = [trimmed rangeOfCharacterFromSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if (range.location == NSNotFound) {
+            current = trimmed;
+        } else {
+            current = [trimmed substringToIndex:range.location];
+            rest = [[trimmed substringFromIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        }
+    }
+    if ([self matchObjectPattern:current]) {
+        if (rest) {
+            for (BBAMLDocumentNode *node in self.children) {
+                [result addObjectsFromArray:[node getElementsByPattern:rest]];
+            }
+        } else {
+            [result addObject:self];
+        }
+    } else {
+        for (BBAMLDocumentNode *node in self.children) {
+            [result addObjectsFromArray:[node getElementsByPattern:trimmed]];
+        }
+    }
+    return result;
+}
+
 - (void)log {
-    NSLog(@"<%@ ... />", self.name);
+    NSLog(@"<%@>", self.name);
+    if (self.innerText) {
+        NSLog(@"%@", self.innerText);
+    }
+    NSLog(@"</%@>", self.name);
 }
 
 - (void)logTree {
