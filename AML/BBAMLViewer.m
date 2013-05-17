@@ -45,6 +45,7 @@
         [self.parent addSubview:self.rootView];
     }
     self.styleSheetParser = [[BBAMLStyleSheetParser alloc] initWithDocumentRoot:self.root];
+    [self.styleSheetParser parse];
 }
 
 #pragma mark - NSXMLParserDelegate Implement

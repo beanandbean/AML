@@ -14,4 +14,6 @@
 
 - (id)initWithDocumentRoot:(BBAMLNodeRoot *)root;
 
+- (void)parse;
+
 @end
