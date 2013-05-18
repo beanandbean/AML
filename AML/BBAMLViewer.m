@@ -48,6 +48,14 @@
     [self.styleSheetParser parse];
 }
 
+- (BBAMLDocumentNode *)getElementById:(NSString *)nodeId {
+    return [self.root getElementById:nodeId];
+}
+
+- (NSArray *)getElementsByPattern:(NSString *)pattern {
+    return [self.root getElementsByPattern:pattern];
+}
+
 #pragma mark - NSXMLParserDelegate Implement
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {

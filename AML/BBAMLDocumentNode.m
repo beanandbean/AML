@@ -8,6 +8,12 @@
 
 #import "BBAMLDocumentNode.h"
 
+@interface BBAMLDocumentNode ()
+
+@property (strong, nonatomic) NSSet *classNames;
+
+@end
+
 @implementation BBAMLDocumentNode
 
 - (id)initWithElementName:(NSString *)name attributes:(NSDictionary *)attributeDict andParent:(BBAMLDocumentNode *)parent {
@@ -18,6 +24,11 @@
         self.innerText = @"";
         self.attributes = attributeDict;
         self.children = [[NSMutableArray alloc] init];
+        NSString *classes = [self.attributes objectForKey:@"class"];
+        if (classes) {
+            NSArray *classArray = [classes componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            self.classNames = [NSSet setWithArray:classArray];
+        }
     }
     return self;
 }
@@ -50,6 +61,9 @@
         if ([currentId isEqualToString:predictId]) {
             return YES;
         }
+    } else if ([trimmed characterAtIndex:0] == '.') {
+        NSString *predictClass = [trimmed substringFromIndex:1];
+        return [self.classNames containsObject:predictClass];
     } else {
         if ([trimmed isEqualToString:self.name]) {
             return YES;

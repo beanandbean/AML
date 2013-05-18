@@ -14,6 +14,7 @@
 		2C3900E4173E4E5300561DB4 /* BBAMLNodeInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900E3173E4E5300561DB4 /* BBAMLNodeInput.m */; };
 		2C3900E7173E4E6000561DB4 /* BBAMLNodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */; };
 		2C479EA7173F554900B53553 /* BBAMLStyleSheetParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */; };
+		2CB722521747A800009FFFF3 /* BBAMLNodeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB722511747A800009FFFF3 /* BBAMLNodeLabel.m */; };
 		2CE54B60173D1C0400CD4763 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE54B5F173D1C0400CD4763 /* UIKit.framework */; };
 		2CE54B62173D1C0400CD4763 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE54B61173D1C0400CD4763 /* Foundation.framework */; };
 		2CE54B64173D1C0400CD4763 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE54B63173D1C0400CD4763 /* CoreGraphics.framework */; };
@@ -46,6 +47,8 @@
 		2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLNodeButton.m; sourceTree = "<group>"; };
 		2C479EA5173F554900B53553 /* BBAMLStyleSheetParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLStyleSheetParser.h; sourceTree = "<group>"; };
 		2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLStyleSheetParser.m; sourceTree = "<group>"; };
+		2CB722501747A800009FFFF3 /* BBAMLNodeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLNodeLabel.h; sourceTree = "<group>"; };
+		2CB722511747A800009FFFF3 /* BBAMLNodeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLNodeLabel.m; sourceTree = "<group>"; };
 		2CE54B5C173D1C0400CD4763 /* AML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AML.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE54B5F173D1C0400CD4763 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2CE54B61173D1C0400CD4763 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -99,6 +102,8 @@
 				2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */,
 				2C117CEC1746518100E4096D /* BBAMLNodeStyle.h */,
 				2C117CED1746518100E4096D /* BBAMLNodeStyle.m */,
+				2CB722501747A800009FFFF3 /* BBAMLNodeLabel.h */,
+				2CB722511747A800009FFFF3 /* BBAMLNodeLabel.m */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -247,6 +252,7 @@
 				2C3900E7173E4E6000561DB4 /* BBAMLNodeButton.m in Sources */,
 				2C479EA7173F554900B53553 /* BBAMLStyleSheetParser.m in Sources */,
 				2C117CEE1746518100E4096D /* BBAMLNodeStyle.m in Sources */,
+				2CB722521747A800009FFFF3 /* BBAMLNodeLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

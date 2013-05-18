@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "BBAMLDocumentNode.h"
+
 @interface BBAMLViewer : NSObject <NSXMLParserDelegate>
 
 @property (weak, nonatomic) UIView *parent;
@@ -15,5 +17,8 @@
 - (id)initWithAMLData:(NSData *)filename andParent:(UIView *)parent;
 
 - (void)view;
+
+- (BBAMLDocumentNode *)getElementById:(NSString *)nodeId;
+- (NSArray *)getElementsByPattern:(NSString *)pattern;
 
 @end
