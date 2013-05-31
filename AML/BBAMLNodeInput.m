@@ -10,10 +10,14 @@
 
 @implementation BBAMLNodeInput
 
+- (void)setTextColor:(UIColor *)color {
+    [((UITextField *)self.nodeView) setTextColor:color];
+}
+
 - (UIView *)view {
     UITextField *nodeView = [[UITextField alloc] init];
-    nodeView.placeholder = self.innerText;
-    nodeView.borderStyle = UITextBorderStyleRoundedRect;
+    [nodeView setText:self.innerText];
+    [nodeView setBackgroundColor:[UIColor whiteColor]];
     [nodeView setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.nodeView = nodeView;
     return self.nodeView;

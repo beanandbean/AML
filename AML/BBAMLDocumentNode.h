@@ -22,12 +22,15 @@
 
 - (BBAMLDocumentNode *)addChildWithName:(NSString *)name andAttributes:(NSDictionary *)attributeDict;
 
-- (UIView *)view;
-
 - (BOOL)matchObjectPattern:(NSString *)pattern;
 
 - (BBAMLDocumentNode *)getElementById:(NSString *)nodeId;
 - (NSArray *)getElementsByPattern:(NSString *)pattern;
+
+- (void)setBackgroundColor:(UIColor *)color;
+- (void)setTextColor:(UIColor *)color;
+
+- (UIView *)view;
 
 - (void)log;
 - (void)logTree;

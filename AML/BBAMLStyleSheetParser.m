@@ -16,7 +16,9 @@
 
 - (NSLayoutConstraint *)constraintForStyle:(NSString *)style forProperty:(int)property onObject:(BBAMLDocumentNode *)node;
 
-+ (int)idForProperty:(NSString *)property;
++ (int)attributeForProperty:(NSString *)property;
+
++ (UIColor *)colorForStyle:(NSString *)style;
 
 @end
 
@@ -69,18 +71,13 @@
 }
 
 - (void)setStyle:(NSString *)style forProperty:(NSString *)property onObject:(BBAMLDocumentNode *)node {
-    int intProperty = [BBAMLStyleSheetParser idForProperty:property];
+    int intProperty = [BBAMLStyleSheetParser attributeForProperty:property];
     if (intProperty != NSLayoutAttributeNotAnAttribute) {
         [self.root.nodeView addConstraint:[self constraintForStyle:style forProperty:intProperty onObject:node]];
     } else if ([property isEqualToString:@"background-color"]) {
-        if ([style length] == 7 && [style characterAtIndex:0] == '#') {
-            unsigned rgbValue = 0;
-            NSScanner *scanner = [NSScanner scannerWithString:style];
-            [scanner setScanLocation:1];
-            [scanner scanHexInt:&rgbValue];
-            UIColor *color = [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
-            node.nodeView.backgroundColor = color;
-        }
+        [node setBackgroundColor:[BBAMLStyleSheetParser colorForStyle:style]];
+    } else if ([property isEqualToString:@"text-color"]) {
+        [node setTextColor:[BBAMLStyleSheetParser colorForStyle:style]];
     }
 }
 
@@ -109,11 +106,11 @@
                         if (propertyEnd.location == NSNotFound) {
                             multiplier = 1.0;
                             NSString *strProperty = [[rest substringFromIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                            toProperty = [BBAMLStyleSheetParser idForProperty:strProperty];
+                            toProperty = [BBAMLStyleSheetParser attributeForProperty:strProperty];
                         } else {
                             NSString *strProperty = [[[rest substringToIndex:propertyEnd.location] substringFromIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]
                                                      ];
-                            toProperty = [BBAMLStyleSheetParser idForProperty:strProperty];
+                            toProperty = [BBAMLStyleSheetParser attributeForProperty:strProperty];
                             NSString *calculation = [[rest substringFromIndex:propertyEnd.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
                             if ([calculation characterAtIndex:0] == '*' || [calculation characterAtIndex:0] == '/') {
                                 NSRange multiplierEnd = [calculation rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"+-"]];
@@ -155,7 +152,7 @@
                                          constant:constant];
 }
 
-+ (int)idForProperty:(NSString *)property {
++ (int)attributeForProperty:(NSString *)property {
     if ([property isEqualToString:@"width"]) {
         return NSLayoutAttributeWidth;
     } else if ([property isEqualToString:@"height"]) {
@@ -176,6 +173,31 @@
         return NSLayoutAttributeBaseline;
     } else {
         return NSLayoutAttributeNotAnAttribute;
+    }
+}
+
++ (UIColor *)colorForStyle:(NSString *)style {
+    if ([style length] == 7 && [style characterAtIndex:0] == '#') {
+        unsigned rgbValue = 0;
+        NSScanner *scanner = [NSScanner scannerWithString:style];
+        [scanner setScanLocation:1];
+        [scanner scanHexInt:&rgbValue];
+        UIColor *color = [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+        return color;
+    } else {
+        NSMutableArray *styleComponents = [[style componentsSeparatedByString:@"-"] mutableCopy];
+        for (int i = 1; i < styleComponents.count; i++) {
+            NSString *word = [styleComponents objectAtIndex:i];
+            [styleComponents replaceObjectAtIndex:i withObject:[word capitalizedString]];
+        }
+        NSString *colorName = [styleComponents componentsJoinedByString:@""];
+        NSString *colorMethod = [NSString stringWithFormat:@"%@Color", colorName];
+        SEL colorSelector = NSSelectorFromString(colorMethod);
+        if ([UIColor respondsToSelector:colorSelector]) {
+            return [UIColor performSelector:colorSelector];
+        } else {
+            return [UIColor clearColor];
+        }
     }
 }
 

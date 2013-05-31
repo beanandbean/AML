@@ -45,12 +45,6 @@
     return child;
 }
 
-- (UIView *)view {
-    self.nodeView = [[UIView alloc] init];
-    [self.nodeView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    return nil;
-}
-
 - (BOOL)matchObjectPattern:(NSString *)pattern {
     NSString *trimmed = [pattern stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if ([trimmed isEqualToString:@"*"]) {
@@ -118,6 +112,19 @@
         }
     }
     return result;
+}
+
+- (void)setBackgroundColor:(UIColor *)color {
+    self.nodeView.backgroundColor = color;
+}
+
+- (void)setTextColor:(UIColor *)color {
+}
+
+- (UIView *)view {
+    self.nodeView = [[UIView alloc] init];
+    [self.nodeView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    return nil;
 }
 
 - (void)log {

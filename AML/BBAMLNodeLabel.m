@@ -10,6 +10,10 @@
 
 @implementation BBAMLNodeLabel
 
+- (void)setTextColor:(UIColor *)color {
+    [((UILabel *)self.nodeView) setTextColor:color];
+}
+
 - (UIView *)view {
     UILabel *nodeView = [[UILabel alloc] init];
     [nodeView setText:self.innerText];
