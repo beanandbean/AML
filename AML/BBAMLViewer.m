@@ -8,27 +8,26 @@
 
 #import "BBAMLViewer.h"
 
-#import "BBAMLNodeRoot.h"
-
 #import "BBAMLStyleSheetParser.h"
+
+#import "BBAMLNodeRoot.h"
 
 @interface BBAMLViewer ()
 
 @property (weak, nonatomic) BBAMLDocumentNode *current;
 
-@property (strong, nonatomic) UIView *rootView;
 @property (strong, nonatomic) NSData *data;
 @property (strong, nonatomic) NSXMLParser *parser;
-@property (strong, nonatomic) BBAMLNodeRoot *root;
 @property (strong, nonatomic) BBAMLStyleSheetParser *styleSheetParser;
 
 @end
 
 @implementation BBAMLViewer
 
-- (id)initWithAMLData:(NSData *)data andParent:(UIView *)parent {
+- (id)initWithAMLData:(NSData *)data andDelegate:(id)delegate andParentView:(UIView *)parent {
     self = [super init];
     if (self) {
+        self.delegate = delegate;
         self.parent = parent;
         self.data = data;
         self.parser = [[NSXMLParser alloc] initWithData:data];
@@ -44,7 +43,7 @@
     if (self.rootView) {
         [self.parent addSubview:self.rootView];
     }
-    self.styleSheetParser = [[BBAMLStyleSheetParser alloc] initWithDocumentRoot:self.root];
+    self.styleSheetParser = [[BBAMLStyleSheetParser alloc] initWithAMLViewer:self];
     [self.styleSheetParser parse];
 }
 

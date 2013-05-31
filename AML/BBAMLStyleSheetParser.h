@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BBAMLNodeRoot.h"
+#import "BBAMLViewer.h"
 
 @interface BBAMLStyleSheetParser : NSObject
 
-- (id)initWithDocumentRoot:(BBAMLNodeRoot *)root;
+- (id)initWithAMLViewer:(BBAMLViewer *)viewer;
 
 - (void)parse;
 

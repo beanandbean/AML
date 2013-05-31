@@ -8,8 +8,12 @@
 
 #import "BBAMLStyleSheetParser.h"
 
+#import "BBAMLNodeRoot.h"
+#import "BBAMLNodeButton.h"
+
 @interface BBAMLStyleSheetParser ()
 
+@property (weak, nonatomic) BBAMLViewer *viewer;
 @property (weak, nonatomic) BBAMLNodeRoot *root;
 
 - (void)setStyle:(NSString *)style forProperty:(NSString *)property onObject:(BBAMLDocumentNode *)node;
@@ -24,10 +28,11 @@
 
 @implementation BBAMLStyleSheetParser
 
-- (id)initWithDocumentRoot:(BBAMLNodeRoot *)root {
+- (id)initWithAMLViewer:(BBAMLViewer *)viewer {
     self = [super init];
     if (self) {
-        self.root = root;
+        self.viewer = viewer;
+        self.root = (BBAMLNodeRoot *)viewer.root;
     }
     return self;
 }
@@ -78,6 +83,11 @@
         [node setBackgroundColor:[BBAMLStyleSheetParser colorForStyle:style]];
     } else if ([property isEqualToString:@"text-color"]) {
         [node setTextColor:[BBAMLStyleSheetParser colorForStyle:style]];
+    } else if ([property isEqualToString:@"click"]) {
+        NSString *actionMethod = [style stringByAppendingString:@":"];
+        SEL selector = NSSelectorFromString(actionMethod);
+        UIButton *button = (UIButton *)node.nodeView;
+        [button addTarget:self.viewer.delegate action:selector forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
