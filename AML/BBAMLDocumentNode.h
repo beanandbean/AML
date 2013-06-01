@@ -30,6 +30,8 @@
 - (void)setBackgroundColor:(UIColor *)color;
 - (void)setTextColor:(UIColor *)color;
 
+- (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
+
 - (UIView *)view;
 
 - (void)log;

@@ -11,7 +11,7 @@
 @implementation BBAMLNodeLabel
 
 - (void)setTextColor:(UIColor *)color {
-    [((UILabel *)self.nodeView) setTextColor:color];
+    [(UILabel *)self.nodeView setTextColor:color];
 }
 
 - (UIView *)view {

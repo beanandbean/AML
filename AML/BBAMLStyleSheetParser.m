@@ -11,6 +11,8 @@
 #import "BBAMLNodeRoot.h"
 #import "BBAMLNodeButton.h"
 
+#import "BBConstantDictionay.h"
+
 @interface BBAMLStyleSheetParser ()
 
 @property (weak, nonatomic) BBAMLViewer *viewer;
@@ -20,7 +22,7 @@
 
 - (NSLayoutConstraint *)constraintForStyle:(NSString *)style forProperty:(int)property onObject:(BBAMLDocumentNode *)node;
 
-+ (int)attributeForProperty:(NSString *)property;
+- (void)addTargetOnObject:(BBAMLDocumentNode *)node andSelector:(NSString *)selectorString andControlEvent:(int)controlEvent;
 
 + (UIColor *)colorForStyle:(NSString *)style;
 
@@ -76,18 +78,16 @@
 }
 
 - (void)setStyle:(NSString *)style forProperty:(NSString *)property onObject:(BBAMLDocumentNode *)node {
-    int intProperty = [BBAMLStyleSheetParser attributeForProperty:property];
-    if (intProperty != NSLayoutAttributeNotAnAttribute) {
-        [self.root.nodeView addConstraint:[self constraintForStyle:style forProperty:intProperty onObject:node]];
-    } else if ([property isEqualToString:@"background-color"]) {
+    int layoutAttribute = [BBConstantDictionay layoutAttribute:property];
+    int controlEvent = [BBConstantDictionay controlEvent:property];
+    if (layoutAttribute != NSLayoutAttributeNotAnAttribute) {
+        [self.root.nodeView addConstraint:[self constraintForStyle:style forProperty:layoutAttribute onObject:node]];
+    } else if (controlEvent != -1) {
+        [self addTargetOnObject:node andSelector:style andControlEvent:controlEvent];
+    } else if ([property isEqualToString:@"backgroundColor"]) {
         [node setBackgroundColor:[BBAMLStyleSheetParser colorForStyle:style]];
-    } else if ([property isEqualToString:@"text-color"]) {
+    } else if ([property isEqualToString:@"textColor"]) {
         [node setTextColor:[BBAMLStyleSheetParser colorForStyle:style]];
-    } else if ([property isEqualToString:@"click"]) {
-        NSString *actionMethod = [style stringByAppendingString:@":"];
-        SEL selector = NSSelectorFromString(actionMethod);
-        UIButton *button = (UIButton *)node.nodeView;
-        [button addTarget:self.viewer.delegate action:selector forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
@@ -116,11 +116,11 @@
                         if (propertyEnd.location == NSNotFound) {
                             multiplier = 1.0;
                             NSString *strProperty = [[rest substringFromIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                            toProperty = [BBAMLStyleSheetParser attributeForProperty:strProperty];
+                            toProperty = [BBConstantDictionay layoutAttribute:strProperty];
                         } else {
                             NSString *strProperty = [[[rest substringToIndex:propertyEnd.location] substringFromIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]
                                                      ];
-                            toProperty = [BBAMLStyleSheetParser attributeForProperty:strProperty];
+                            toProperty = [BBConstantDictionay layoutAttribute:strProperty];
                             NSString *calculation = [[rest substringFromIndex:propertyEnd.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
                             if ([calculation characterAtIndex:0] == '*' || [calculation characterAtIndex:0] == '/') {
                                 NSRange multiplierEnd = [calculation rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"+-"]];
@@ -162,29 +162,12 @@
                                          constant:constant];
 }
 
-+ (int)attributeForProperty:(NSString *)property {
-    if ([property isEqualToString:@"width"]) {
-        return NSLayoutAttributeWidth;
-    } else if ([property isEqualToString:@"height"]) {
-        return NSLayoutAttributeHeight;
-    } else if ([property isEqualToString:@"top"]) {
-        return NSLayoutAttributeTop;
-    } else if ([property isEqualToString:@"bottom"]) {
-        return NSLayoutAttributeBottom;
-    } else if ([property isEqualToString:@"left"]) {
-        return NSLayoutAttributeLeft;
-    } else if ([property isEqualToString:@"right"]) {
-        return NSLayoutAttributeRight;
-    } else if ([property isEqualToString:@"centerX"]) {
-        return NSLayoutAttributeCenterX;
-    } else if ([property isEqualToString:@"centerY"]) {
-        return NSLayoutAttributeCenterY;
-    } else if ([property isEqualToString:@"baseline"]) {
-        return NSLayoutAttributeBaseline;
-    } else {
-        return NSLayoutAttributeNotAnAttribute;
-    }
+- (void)addTargetOnObject:(BBAMLDocumentNode *)node andSelector:(NSString *)selectorString andControlEvent:(int)controlEvent {
+    NSString *actionMethod = [selectorString stringByAppendingString:@":"];
+    SEL selector = NSSelectorFromString(actionMethod);
+    [node addTarget:self.viewer.delegate action:selector forControlEvents:controlEvent];
 }
+
 
 + (UIColor *)colorForStyle:(NSString *)style {
     if ([style length] == 7 && [style characterAtIndex:0] == '#') {

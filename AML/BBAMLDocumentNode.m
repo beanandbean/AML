@@ -121,6 +121,9 @@
 - (void)setTextColor:(UIColor *)color {
 }
 
+- (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+}
+
 - (UIView *)view {
     self.nodeView = [[UIView alloc] init];
     [self.nodeView setTranslatesAutoresizingMaskIntoConstraints:NO];

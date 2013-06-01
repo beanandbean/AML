@@ -14,6 +14,10 @@
     [((UITextField *)self.nodeView) setTextColor:color];
 }
 
+- (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    [(UITextField *)self.nodeView addTarget:target action:action forControlEvents:controlEvents];
+}
+
 - (UIView *)view {
     UITextField *nodeView = [[UITextField alloc] init];
     [nodeView setText:self.innerText];

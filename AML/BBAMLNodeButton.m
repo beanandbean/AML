@@ -14,6 +14,10 @@
     [((UIButton *)self.nodeView) setTitleColor:color forState:UIControlStateNormal];
 }
 
+- (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    [(UIButton *)self.nodeView addTarget:target action:action forControlEvents:controlEvents];
+}
+
 - (UIView *)view {
     UIButton *nodeView = [UIButton buttonWithType:UIButtonTypeCustom];
     [nodeView setTitle:self.innerText forState:UIControlStateNormal];
