@@ -20,9 +20,9 @@
 
 - (void)setStyle:(NSString *)style forProperty:(NSString *)property onObject:(BBAMLDocumentNode *)node;
 
-- (NSLayoutConstraint *)constraintForStyle:(NSString *)style forProperty:(int)property onObject:(BBAMLDocumentNode *)node;
-
 - (void)addTargetOnObject:(BBAMLDocumentNode *)node andSelector:(NSString *)selectorString andControlEvent:(int)controlEvent;
+
+- (NSLayoutConstraint *)constraintForStyle:(NSString *)style forProperty:(int)property onObject:(BBAMLDocumentNode *)node withPriority:(int)priority;
 
 + (UIColor *)colorForStyle:(NSString *)style;
 
@@ -78,10 +78,16 @@
 }
 
 - (void)setStyle:(NSString *)style forProperty:(NSString *)property onObject:(BBAMLDocumentNode *)node {
+    int priority = 100;
+    while ([style characterAtIndex:style.length - 1] == '!') {
+        priority += 100;
+        style = [style substringToIndex:style.length - 2];
+    }
+    priority = priority > 1000 ? 1000 : priority;
     int layoutAttribute = [BBConstantDictionay layoutAttribute:property];
     int controlEvent = [BBConstantDictionay controlEvent:property];
     if (layoutAttribute != NSLayoutAttributeNotAnAttribute) {
-        [self.root.nodeView addConstraint:[self constraintForStyle:style forProperty:layoutAttribute onObject:node]];
+        [self.root.nodeView addConstraint:[self constraintForStyle:style forProperty:layoutAttribute onObject:node withPriority:priority]];
     } else if (controlEvent != -1) {
         [self addTargetOnObject:node andSelector:style andControlEvent:controlEvent];
     } else if ([property isEqualToString:@"backgroundColor"]) {
@@ -91,7 +97,13 @@
     }
 }
 
-- (NSLayoutConstraint *)constraintForStyle:(NSString *)style forProperty:(int)property onObject:(BBAMLDocumentNode *)node {
+- (void)addTargetOnObject:(BBAMLDocumentNode *)node andSelector:(NSString *)selectorString andControlEvent:(int)controlEvent {
+    NSString *actionMethod = [selectorString stringByAppendingString:@":"];
+    SEL selector = NSSelectorFromString(actionMethod);
+    [node addTarget:self.viewer.delegate action:selector forControlEvents:controlEvent];
+}
+
+- (NSLayoutConstraint *)constraintForStyle:(NSString *)style forProperty:(int)property onObject:(BBAMLDocumentNode *)node withPriority:(int)priority {
     UIView *toItem = nil;
     int toProperty = NSLayoutAttributeNotAnAttribute;
     int multiplier = 0.0;
@@ -153,21 +165,16 @@
     } else {
         constant = [trimmed floatValue];
     }
-    return [NSLayoutConstraint constraintWithItem:node.nodeView
-                                        attribute:property
-                                        relatedBy:NSLayoutRelationEqual
-                                           toItem:toItem
-                                        attribute:toProperty
-                                       multiplier:multiplier
-                                         constant:constant];
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:node.nodeView
+                                                                  attribute:property
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:toItem
+                                                                  attribute:toProperty
+                                                                 multiplier:multiplier
+                                                                   constant:constant];
+    [constraint setPriority:priority];
+    return constraint;
 }
-
-- (void)addTargetOnObject:(BBAMLDocumentNode *)node andSelector:(NSString *)selectorString andControlEvent:(int)controlEvent {
-    NSString *actionMethod = [selectorString stringByAppendingString:@":"];
-    SEL selector = NSSelectorFromString(actionMethod);
-    [node addTarget:self.viewer.delegate action:selector forControlEvents:controlEvent];
-}
-
 
 + (UIColor *)colorForStyle:(NSString *)style {
     if ([style length] == 7 && [style characterAtIndex:0] == '#') {
