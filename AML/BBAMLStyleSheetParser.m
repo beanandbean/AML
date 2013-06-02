@@ -9,11 +9,12 @@
 #import "BBAMLStyleSheetParser.h"
 
 #import "BBAMLNodeRoot.h"
-#import "BBAMLNodeButton.h"
 
 #import "BBConstantDictionay.h"
 
 @interface BBAMLStyleSheetParser ()
+
+@property (nonatomic) int priority;
 
 @property (weak, nonatomic) BBAMLViewer *viewer;
 @property (weak, nonatomic) BBAMLNodeRoot *root;
@@ -61,9 +62,20 @@
             NSArray *nodes = [self.root getElementsByPattern:pattern];
             NSArray *styleArray = [style componentsSeparatedByString:@";"];
             for (BBAMLDocumentNode *node in nodes) {
+                self.priority = 500;
                 for (NSString *styleItem in styleArray) {
                     NSString *trimmed = [styleItem stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
                     if (![trimmed isEqualToString:@""]) {
+                        int slash = 0;
+                        while (slash < trimmed.length && [trimmed characterAtIndex:slash] == '/') {
+                            slash++;
+                            if (slash > 1) {
+                                break;
+                            }
+                        }
+                        if (slash > 1) {
+                            continue;
+                        }
                         NSRange range = [trimmed rangeOfString:@":"];
                         if (range.location != NSNotFound) {
                             NSString *property = [[trimmed substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -78,22 +90,36 @@
 }
 
 - (void)setStyle:(NSString *)style forProperty:(NSString *)property onObject:(BBAMLDocumentNode *)node {
-    int priority = 100;
-    while ([style characterAtIndex:style.length - 1] == '!') {
-        priority += 100;
-        style = [style substringToIndex:style.length - 2];
-    }
-    priority = priority > 1000 ? 1000 : priority;
-    int layoutAttribute = [BBConstantDictionay layoutAttribute:property];
-    int controlEvent = [BBConstantDictionay controlEvent:property];
-    if (layoutAttribute != NSLayoutAttributeNotAnAttribute) {
-        [self.root.nodeView addConstraint:[self constraintForStyle:style forProperty:layoutAttribute onObject:node withPriority:priority]];
-    } else if (controlEvent != -1) {
-        [self addTargetOnObject:node andSelector:style andControlEvent:controlEvent];
-    } else if ([property isEqualToString:@"backgroundColor"]) {
-        [node setBackgroundColor:[BBAMLStyleSheetParser colorForStyle:style]];
-    } else if ([property isEqualToString:@"textColor"]) {
-        [node setTextColor:[BBAMLStyleSheetParser colorForStyle:style]];
+    if ([property characterAtIndex:0] == '#') {
+        property = [property substringFromIndex:1];
+        if ([property isEqualToString:@"priority"]) {
+            self.priority = style.intValue;
+            self.priority = self.priority > 1000 ? 1000 : self.priority;
+        }
+    } else {
+        int priority = self.priority;
+        NSRange range = [style rangeOfString:@"!"];
+        if (range.location != NSNotFound) {
+            NSString *strPriority = [style substringFromIndex:range.location + 1];
+            style = [style substringToIndex:range.location];
+            if (strPriority.length) {
+                priority = strPriority.intValue;
+                priority = priority > 1000 ? 1000 : priority;
+            } else {
+                priority = 1000;
+            }
+        }
+        int layoutAttribute = [BBConstantDictionay layoutAttribute:property];
+        int controlEvent = [BBConstantDictionay controlEvent:property];
+        if (layoutAttribute != NSLayoutAttributeNotAnAttribute) {
+            [self.root.nodeView addConstraint:[self constraintForStyle:style forProperty:layoutAttribute onObject:node withPriority:priority]];
+        } else if (controlEvent != -1) {
+            [self addTargetOnObject:node andSelector:style andControlEvent:controlEvent];
+        } else if ([property isEqualToString:@"backgroundColor"]) {
+            [node setBackgroundColor:[BBAMLStyleSheetParser colorForStyle:style]];
+        } else if ([property isEqualToString:@"textColor"]) {
+            [node setTextColor:[BBAMLStyleSheetParser colorForStyle:style]];
+        }
     }
 }
 
