@@ -39,7 +39,7 @@
 }
 
 - (IBAction)test:(id)sender {
-    NSLog(@"Test passed!");
+    NSLog(@"!");
 }
 
 @end

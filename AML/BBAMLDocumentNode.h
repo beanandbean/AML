@@ -29,6 +29,7 @@
 
 - (void)setBackgroundColor:(UIColor *)color;
 - (void)setTextColor:(UIColor *)color;
+- (void)setHidden:(bool)hidden;
 
 - (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
 

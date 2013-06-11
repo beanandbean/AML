@@ -11,7 +11,7 @@
 @implementation BBAMLNodeButton
 
 - (void)setTextColor:(UIColor *)color {
-    [((UIButton *)self.nodeView) setTitleColor:color forState:UIControlStateNormal];
+    [(UIButton *)self.nodeView setTitleColor:color forState:UIControlStateNormal];
 }
 
 - (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {

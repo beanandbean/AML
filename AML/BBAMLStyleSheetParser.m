@@ -19,6 +19,8 @@
 @property (weak, nonatomic) BBAMLViewer *viewer;
 @property (weak, nonatomic) BBAMLNodeRoot *root;
 
+- (void)parseStyle:(NSString *)style forPattern:(NSString *)pattern;
+
 - (void)setStyle:(NSString *)style forProperty:(NSString *)property onObject:(BBAMLDocumentNode *)node;
 
 - (void)addTargetOnObject:(BBAMLDocumentNode *)node andSelector:(NSString *)selectorString andControlEvent:(int)controlEvent;
@@ -59,30 +61,35 @@
             styleSheet = [[rest substringFromIndex:styleEnd.location + 1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         }
         if (![style isEqualToString:@""]) {
-            NSArray *nodes = [self.root getElementsByPattern:pattern];
-            NSArray *styleArray = [style componentsSeparatedByString:@";"];
-            for (BBAMLDocumentNode *node in nodes) {
-                self.priority = 500;
-                for (NSString *styleItem in styleArray) {
-                    NSString *trimmed = [styleItem stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                    if (![trimmed isEqualToString:@""]) {
-                        int slash = 0;
-                        while (slash < trimmed.length && [trimmed characterAtIndex:slash] == '/') {
-                            slash++;
-                            if (slash > 1) {
-                                break;
-                            }
-                        }
-                        if (slash > 1) {
-                            continue;
-                        }
-                        NSRange range = [trimmed rangeOfString:@":"];
-                        if (range.location != NSNotFound) {
-                            NSString *property = [[trimmed substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                            NSString *styleValue = [[trimmed substringFromIndex:range.location + 1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                            [self setStyle:styleValue forProperty:property onObject:node];
-                        }
+            [self parseStyle:style forPattern:pattern];
+        }
+    }
+    [self.root.nodeView layoutIfNeeded];
+}
+
+- (void)parseStyle:(NSString *)style forPattern:(NSString *)pattern {
+    NSArray *nodes = [self.root getElementsByPattern:pattern];
+    NSArray *styleArray = [style componentsSeparatedByString:@";"];
+    for (BBAMLDocumentNode *node in nodes) {
+        self.priority = 500;
+        for (NSString *styleItem in styleArray) {
+            NSString *trimmed = [styleItem stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            if (![trimmed isEqualToString:@""]) {
+                int slash = 0;
+                while (slash < trimmed.length && [trimmed characterAtIndex:slash] == '/') {
+                    slash++;
+                    if (slash > 1) {
+                        break;
                     }
+                }
+                if (slash > 1) {
+                    continue;
+                }
+                NSRange range = [trimmed rangeOfString:@":"];
+                if (range.location != NSNotFound) {
+                    NSString *property = [[trimmed substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                    NSString *styleValue = [[trimmed substringFromIndex:range.location + 1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                    [self setStyle:styleValue forProperty:property onObject:node];
                 }
             }
         }
@@ -119,6 +126,12 @@
             [node setBackgroundColor:[BBAMLStyleSheetParser colorForStyle:style]];
         } else if ([property isEqualToString:@"textColor"]) {
             [node setTextColor:[BBAMLStyleSheetParser colorForStyle:style]];
+        } else if ([property isEqualToString:@"hidden"]) {
+            if ([style isEqualToString:@"YES"]) {
+                [node setHidden:YES];
+            } else if ([style isEqualToString:@"NO"]) {
+                [node setHidden:NO];
+            }
         }
     }
 }

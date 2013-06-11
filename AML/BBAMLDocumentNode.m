@@ -121,6 +121,10 @@
 - (void)setTextColor:(UIColor *)color {
 }
 
+- (void)setHidden:(bool)hidden {
+    self.nodeView.hidden = hidden;
+}
+
 - (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
 }
 
