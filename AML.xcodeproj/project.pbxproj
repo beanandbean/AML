@@ -14,6 +14,7 @@
 		2C3900E4173E4E5300561DB4 /* BBAMLNodeInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900E3173E4E5300561DB4 /* BBAMLNodeInput.m */; };
 		2C3900E7173E4E6000561DB4 /* BBAMLNodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */; };
 		2C479EA7173F554900B53553 /* BBAMLStyleSheetParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */; };
+		2CA302F717674E20005C5CE6 /* BBAMLAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA302F617674E20005C5CE6 /* BBAMLAnimation.m */; };
 		2CAE8850175A168900339539 /* BBConstantDictionay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE884F175A168900339539 /* BBConstantDictionay.m */; };
 		2CB722521747A800009FFFF3 /* BBAMLNodeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB722511747A800009FFFF3 /* BBAMLNodeLabel.m */; };
 		2CE54B60173D1C0400CD4763 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE54B5F173D1C0400CD4763 /* UIKit.framework */; };
@@ -48,6 +49,8 @@
 		2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLNodeButton.m; sourceTree = "<group>"; };
 		2C479EA5173F554900B53553 /* BBAMLStyleSheetParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLStyleSheetParser.h; sourceTree = "<group>"; };
 		2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLStyleSheetParser.m; sourceTree = "<group>"; };
+		2CA302F517674E20005C5CE6 /* BBAMLAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLAnimation.h; sourceTree = "<group>"; };
+		2CA302F617674E20005C5CE6 /* BBAMLAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLAnimation.m; sourceTree = "<group>"; };
 		2CAE884E175A168900339539 /* BBConstantDictionay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBConstantDictionay.h; sourceTree = "<group>"; };
 		2CAE884F175A168900339539 /* BBConstantDictionay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBConstantDictionay.m; sourceTree = "<group>"; };
 		2CB722501747A800009FFFF3 /* BBAMLNodeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLNodeLabel.h; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				2CE54B77173D1C0400CD4763 /* MainStoryboard_iPhone.storyboard */,
 				2C3900D7173E4DB700561DB4 /* Nodes */,
 				2CE54B66173D1C0400CD4763 /* Supporting Files */,
+				2CA302F517674E20005C5CE6 /* BBAMLAnimation.h */,
+				2CA302F617674E20005C5CE6 /* BBAMLAnimation.m */,
 			);
 			path = AML;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				2C117CEE1746518100E4096D /* BBAMLNodeStyle.m in Sources */,
 				2CB722521747A800009FFFF3 /* BBAMLNodeLabel.m in Sources */,
 				2CAE8850175A168900339539 /* BBConstantDictionay.m in Sources */,
+				2CA302F717674E20005C5CE6 /* BBAMLAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

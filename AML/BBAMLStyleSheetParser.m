@@ -10,6 +10,8 @@
 
 #import "BBAMLNodeRoot.h"
 
+#import "BBAMLAnimation.h"
+
 #import "BBConstantDictionay.h"
 
 @interface BBAMLStyleSheetParser ()
@@ -19,11 +21,13 @@
 @property (weak, nonatomic) BBAMLViewer *viewer;
 @property (weak, nonatomic) BBAMLNodeRoot *root;
 
+@property (strong, nonatomic) NSMutableDictionary *animations;
+
 - (void)parseStyle:(NSString *)style forPattern:(NSString *)pattern;
 
 - (void)setStyle:(NSString *)style forProperty:(NSString *)property onObject:(BBAMLDocumentNode *)node;
 
-- (void)addTargetOnObject:(BBAMLDocumentNode *)node andSelector:(NSString *)selectorString andControlEvent:(int)controlEvent;
+- (void)addTargetOnObject:(BBAMLDocumentNode *)node andAction:(NSString *)action andControlEvent:(int)controlEvent;
 
 - (NSLayoutConstraint *)constraintForStyle:(NSString *)style forProperty:(int)property onObject:(BBAMLDocumentNode *)node withPriority:(int)priority;
 
@@ -38,12 +42,17 @@
     if (self) {
         self.viewer = viewer;
         self.root = (BBAMLNodeRoot *)viewer.root;
+        self.animations = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
 
 - (void)parse {
     NSString *styleSheet = [self.root.styleSheet stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    [self parseStyleSheet:styleSheet];
+}
+
+- (void)parseStyleSheet:(NSString *)styleSheet {
     while (![styleSheet isEqualToString:@""]) {
         NSRange styleBegin = [styleSheet rangeOfString:@"{"];
         if (styleBegin.location == NSNotFound) {
@@ -51,14 +60,24 @@
         }
         NSString *pattern = [[styleSheet substringToIndex:styleBegin.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         NSString *rest = [[styleSheet substringFromIndex:styleBegin.location + 1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        NSRange styleEnd = [rest rangeOfString:@"}"];
+        int count = 1, i;
+        for (i = 0; i < rest.length; i++) {
+            if ([rest characterAtIndex:i] == '{') {
+                count++;
+            } else if ([rest characterAtIndex:i] == '}') {
+                count--;
+                if (count <= 0) {
+                    break;
+                }
+            }
+        }
         NSString *style;
-        if (styleEnd.location == NSNotFound) {
+        if (count > 0) {
             style = rest;
             styleSheet = @"";
         } else {
-            style = [[rest substringToIndex:styleEnd.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            styleSheet = [[rest substringFromIndex:styleEnd.location + 1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            style = [[rest substringToIndex:i] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            styleSheet = [[rest substringFromIndex:i + 1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         }
         if (![style isEqualToString:@""]) {
             [self parseStyle:style forPattern:pattern];
@@ -68,28 +87,36 @@
 }
 
 - (void)parseStyle:(NSString *)style forPattern:(NSString *)pattern {
-    NSArray *nodes = [self.root getElementsByPattern:pattern];
-    NSArray *styleArray = [style componentsSeparatedByString:@";"];
-    for (BBAMLDocumentNode *node in nodes) {
-        self.priority = 500;
-        for (NSString *styleItem in styleArray) {
-            NSString *trimmed = [styleItem stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            if (![trimmed isEqualToString:@""]) {
-                int slash = 0;
-                while (slash < trimmed.length && [trimmed characterAtIndex:slash] == '/') {
-                    slash++;
-                    if (slash > 1) {
-                        break;
+    if ([pattern characterAtIndex:0] == '@') {
+        pattern = [pattern substringFromIndex:1];
+        if ([[pattern substringToIndex:10] isEqualToString:@"animation "]) {
+            NSString *animationName = [[pattern substringFromIndex:10] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            [self.animations setObject:[[BBAMLAnimation alloc] initWithAnimationStyleSheet:style andDelegate:self] forKey:animationName];
+        }
+    } else {
+        NSArray *nodes = [self.root getElementsByPattern:pattern];
+        NSArray *styleArray = [style componentsSeparatedByString:@";"];
+        for (BBAMLDocumentNode *node in nodes) {
+            self.priority = 500;
+            for (NSString *styleItem in styleArray) {
+                NSString *trimmed = [styleItem stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                if (![trimmed isEqualToString:@""]) {
+                    int slash = 0;
+                    while (slash < trimmed.length && [trimmed characterAtIndex:slash] == '/') {
+                        slash++;
+                        if (slash > 1) {
+                            break;
+                        }
                     }
-                }
-                if (slash > 1) {
-                    continue;
-                }
-                NSRange range = [trimmed rangeOfString:@":"];
-                if (range.location != NSNotFound) {
-                    NSString *property = [[trimmed substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                    NSString *styleValue = [[trimmed substringFromIndex:range.location + 1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                    [self setStyle:styleValue forProperty:property onObject:node];
+                    if (slash > 1) {
+                        continue;
+                    }
+                    NSRange range = [trimmed rangeOfString:@":"];
+                    if (range.location != NSNotFound) {
+                        NSString *property = [[trimmed substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                        NSString *styleValue = [[trimmed substringFromIndex:range.location + 1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                        [self setStyle:styleValue forProperty:property onObject:node];
+                    }
                 }
             }
         }
@@ -97,7 +124,7 @@
 }
 
 - (void)setStyle:(NSString *)style forProperty:(NSString *)property onObject:(BBAMLDocumentNode *)node {
-    if ([property characterAtIndex:0] == '#') {
+    if ([property characterAtIndex:0] == '@') {
         property = [property substringFromIndex:1];
         if ([property isEqualToString:@"priority"]) {
             self.priority = style.intValue;
@@ -121,7 +148,7 @@
         if (layoutAttribute != NSLayoutAttributeNotAnAttribute) {
             [self.root.nodeView addConstraint:[self constraintForStyle:style forProperty:layoutAttribute onObject:node withPriority:priority]];
         } else if (controlEvent != -1) {
-            [self addTargetOnObject:node andSelector:style andControlEvent:controlEvent];
+            [self addTargetOnObject:node andAction:style andControlEvent:controlEvent];
         } else if ([property isEqualToString:@"backgroundColor"]) {
             [node setBackgroundColor:[BBAMLStyleSheetParser colorForStyle:style]];
         } else if ([property isEqualToString:@"textColor"]) {
@@ -136,10 +163,17 @@
     }
 }
 
-- (void)addTargetOnObject:(BBAMLDocumentNode *)node andSelector:(NSString *)selectorString andControlEvent:(int)controlEvent {
-    NSString *actionMethod = [selectorString stringByAppendingString:@":"];
-    SEL selector = NSSelectorFromString(actionMethod);
-    [node addTarget:self.viewer.delegate action:selector forControlEvents:controlEvent];
+- (void)addTargetOnObject:(BBAMLDocumentNode *)node andAction:(NSString *)action andControlEvent:(int)controlEvent {
+    if ([action characterAtIndex:0] == '@') {
+        NSString *actionMethod = [[action substringFromIndex:1] stringByAppendingString:@":"];
+        SEL selector = NSSelectorFromString(actionMethod);
+        [node addTarget:self.viewer.delegate action:selector forControlEvents:controlEvent];
+    } else {
+        BBAMLAnimation *animation = [self.animations objectForKey:action];
+        if (animation) {
+            [node addTarget:animation action:@selector(runAnimation:) forControlEvents:controlEvent];
+        }
+    }
 }
 
 - (NSLayoutConstraint *)constraintForStyle:(NSString *)style forProperty:(int)property onObject:(BBAMLDocumentNode *)node withPriority:(int)priority {

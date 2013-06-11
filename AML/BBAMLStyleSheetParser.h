@@ -15,5 +15,6 @@
 - (id)initWithAMLViewer:(BBAMLViewer *)viewer;
 
 - (void)parse;
+- (void)parseStyleSheet:(NSString *)styleSheet;
 
 @end
