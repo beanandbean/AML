@@ -14,11 +14,15 @@
 
 @interface BBAMLViewer ()
 
+@property (weak, nonatomic) id delegate;
+@property (weak, nonatomic) UIView *parentView;
 @property (weak, nonatomic) BBAMLDocumentNode *current;
 
 @property (strong, nonatomic) NSData *data;
-@property (strong, nonatomic) NSXMLParser *xmlParser;
+@property (strong, nonatomic) UIView *rootView;
+@property (strong, nonatomic) NSXMLParser *parser;
 @property (strong, nonatomic) NSArray *fullScreenConstraints;
+@property (strong, nonatomic) BBAMLNodeRoot *root;
 @property (strong, nonatomic) BBAMLStyleSheetParser *styleSheetParser;
 
 @end
@@ -31,15 +35,15 @@
         self.delegate = delegate;
         self.parentView = parent;
         self.data = data;
-        self.xmlParser = [[NSXMLParser alloc] initWithData:data];
-        self.xmlParser.delegate = self;
-        self.xmlParser.shouldProcessNamespaces = NO;
+        self.parser = [[NSXMLParser alloc] initWithData:data];
+        self.parser.delegate = self;
+        self.parser.shouldProcessNamespaces = NO;
     }
     return self;
 }
 
 - (void)view {
-    [self.xmlParser parse];
+    [self.parser parse];
     self.rootView = [self.root view];
     if (self.rootView) {
         [self.parentView addSubview:self.rootView];
@@ -125,4 +129,3 @@
 }
 
 @end
-

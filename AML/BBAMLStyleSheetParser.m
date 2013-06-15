@@ -41,7 +41,7 @@
     self = [super init];
     if (self) {
         self.viewer = viewer;
-        self.root = (BBAMLNodeRoot *)viewer.root;
+        self.root = (BBAMLNodeRoot *)[viewer performSelector:@selector(root)];
         self.animations = [[NSMutableDictionary alloc] init];
     }
     return self;
@@ -176,9 +176,10 @@
 
 - (void)addTargetOnObject:(BBAMLDocumentNode *)node withAction:(NSString *)action andControlEvent:(int)controlEvent {
     if ([action characterAtIndex:0] == '@') {
+        id delegate = [self.viewer performSelector:@selector(delegate)];
         NSString *actionMethod = [[action substringFromIndex:1] stringByAppendingString:@":"];
         SEL selector = NSSelectorFromString(actionMethod);
-        [node addTarget:self.viewer.delegate action:selector forControlEvents:controlEvent];
+        [node addTarget:delegate action:selector forControlEvents:controlEvent];
     } else {
         BBAMLAnimation *animation = [self.animations objectForKey:action];
         if (animation) {
