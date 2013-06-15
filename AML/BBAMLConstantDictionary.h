@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BBConstantDictionay : NSObject
+@interface BBAMLConstantDictionary : NSObject
 
 + (int)layoutAttribute:(NSString *)attribute;
 + (int)controlEvent:(NSString *)event;

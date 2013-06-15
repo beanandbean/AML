@@ -15,7 +15,7 @@
 		2C3900E7173E4E6000561DB4 /* BBAMLNodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */; };
 		2C479EA7173F554900B53553 /* BBAMLStyleSheetParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */; };
 		2CA302F717674E20005C5CE6 /* BBAMLAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA302F617674E20005C5CE6 /* BBAMLAnimation.m */; };
-		2CAE8850175A168900339539 /* BBConstantDictionay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE884F175A168900339539 /* BBConstantDictionay.m */; };
+		2CAE8850175A168900339539 /* BBAMLConstantDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE884F175A168900339539 /* BBAMLConstantDictionary.m */; };
 		2CB722521747A800009FFFF3 /* BBAMLNodeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB722511747A800009FFFF3 /* BBAMLNodeLabel.m */; };
 		2CE54B60173D1C0400CD4763 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE54B5F173D1C0400CD4763 /* UIKit.framework */; };
 		2CE54B62173D1C0400CD4763 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE54B61173D1C0400CD4763 /* Foundation.framework */; };
@@ -51,8 +51,8 @@
 		2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLStyleSheetParser.m; sourceTree = "<group>"; };
 		2CA302F517674E20005C5CE6 /* BBAMLAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLAnimation.h; sourceTree = "<group>"; };
 		2CA302F617674E20005C5CE6 /* BBAMLAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLAnimation.m; sourceTree = "<group>"; };
-		2CAE884E175A168900339539 /* BBConstantDictionay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBConstantDictionay.h; sourceTree = "<group>"; };
-		2CAE884F175A168900339539 /* BBConstantDictionay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBConstantDictionay.m; sourceTree = "<group>"; };
+		2CAE884E175A168900339539 /* BBAMLConstantDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLConstantDictionary.h; sourceTree = "<group>"; };
+		2CAE884F175A168900339539 /* BBAMLConstantDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLConstantDictionary.m; sourceTree = "<group>"; };
 		2CB722501747A800009FFFF3 /* BBAMLNodeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLNodeLabel.h; sourceTree = "<group>"; };
 		2CB722511747A800009FFFF3 /* BBAMLNodeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLNodeLabel.m; sourceTree = "<group>"; };
 		2CE54B5C173D1C0400CD4763 /* AML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AML.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +144,10 @@
 		2CE54B65173D1C0400CD4763 /* AML */ = {
 			isa = PBXGroup;
 			children = (
+				2CA302F517674E20005C5CE6 /* BBAMLAnimation.h */,
+				2CA302F617674E20005C5CE6 /* BBAMLAnimation.m */,
+				2CAE884E175A168900339539 /* BBAMLConstantDictionary.h */,
+				2CAE884F175A168900339539 /* BBAMLConstantDictionary.m */,
 				2CE54B8A173D255900CD4763 /* BBAMLDocumentNode.h */,
 				2CE54B8B173D255900CD4763 /* BBAMLDocumentNode.m */,
 				2C479EA5173F554900B53553 /* BBAMLStyleSheetParser.h */,
@@ -152,16 +156,12 @@
 				2CE54B88173D1EB200CD4763 /* BBAMLViewer.m */,
 				2CE54B6E173D1C0400CD4763 /* BBAppDelegate.h */,
 				2CE54B6F173D1C0400CD4763 /* BBAppDelegate.m */,
-				2CAE884E175A168900339539 /* BBConstantDictionay.h */,
-				2CAE884F175A168900339539 /* BBConstantDictionay.m */,
 				2CE54B7D173D1C0400CD4763 /* BBViewController.h */,
 				2CE54B7E173D1C0400CD4763 /* BBViewController.m */,
 				2CE54B7A173D1C0400CD4763 /* MainStoryboard_iPad.storyboard */,
 				2CE54B77173D1C0400CD4763 /* MainStoryboard_iPhone.storyboard */,
 				2C3900D7173E4DB700561DB4 /* Nodes */,
 				2CE54B66173D1C0400CD4763 /* Supporting Files */,
-				2CA302F517674E20005C5CE6 /* BBAMLAnimation.h */,
-				2CA302F617674E20005C5CE6 /* BBAMLAnimation.m */,
 			);
 			path = AML;
 			sourceTree = "<group>";
@@ -263,7 +263,7 @@
 				2C479EA7173F554900B53553 /* BBAMLStyleSheetParser.m in Sources */,
 				2C117CEE1746518100E4096D /* BBAMLNodeStyle.m in Sources */,
 				2CB722521747A800009FFFF3 /* BBAMLNodeLabel.m in Sources */,
-				2CAE8850175A168900339539 /* BBConstantDictionay.m in Sources */,
+				2CAE8850175A168900339539 /* BBAMLConstantDictionary.m in Sources */,
 				2CA302F717674E20005C5CE6 /* BBAMLAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

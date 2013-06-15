@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 beanandbean. All rights reserved.
 //
 
-#import "BBConstantDictionay.h"
+#import "BBAMLConstantDictionary.h"
 
-@implementation BBConstantDictionay
+@implementation BBAMLConstantDictionary
 
 + (int)layoutAttribute:(NSString *)attribute {
     if ([attribute isEqualToString:@"width"]) {

@@ -12,7 +12,7 @@
 
 #import "BBAMLAnimation.h"
 
-#import "BBConstantDictionay.h"
+#import "BBAMLConstantDictionary.h"
 
 @interface BBAMLStyleSheetParser ()
 
@@ -143,8 +143,8 @@
                 priority = 1000;
             }
         }
-        int layoutAttribute = [BBConstantDictionay layoutAttribute:property];
-        int controlEvent = [BBConstantDictionay controlEvent:property];
+        int layoutAttribute = [BBAMLConstantDictionary layoutAttribute:property];
+        int controlEvent = [BBAMLConstantDictionary controlEvent:property];
         if (layoutAttribute != NSLayoutAttributeNotAnAttribute) {
             [self.root.nodeView addConstraint:[self constraintForStyle:style forProperty:layoutAttribute onObject:node withPriority:priority]];
         } else if (controlEvent != -1) {
@@ -201,11 +201,11 @@
                         if (propertyEnd.location == NSNotFound) {
                             multiplier = 1.0;
                             NSString *strProperty = [[rest substringFromIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                            toProperty = [BBConstantDictionay layoutAttribute:strProperty];
+                            toProperty = [BBAMLConstantDictionary layoutAttribute:strProperty];
                         } else {
                             NSString *strProperty = [[[rest substringToIndex:propertyEnd.location] substringFromIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]
                                                      ];
-                            toProperty = [BBConstantDictionay layoutAttribute:strProperty];
+                            toProperty = [BBAMLConstantDictionary layoutAttribute:strProperty];
                             NSString *calculation = [[rest substringFromIndex:propertyEnd.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
                             if ([calculation characterAtIndex:0] == '*' || [calculation characterAtIndex:0] == '/') {
                                 NSRange multiplierEnd = [calculation rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"+-"]];
