@@ -10,6 +10,4 @@
 
 @interface BBAMLNodeView : BBAMLDocumentNode
 
-- (void)fullScreenWithPriority:(int)priority;
-
 @end

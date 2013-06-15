@@ -12,7 +12,7 @@
 
 @interface BBAMLAnimation : NSObject
 
-- (id)initWithAnimationStyleSheet:(NSString *)styleSheet andDelegate:(BBAMLStyleSheetParser *)delegate;
+- (id)initWithAnimationStyleSheet:(NSString *)styleSheet duration:(float)duration andDelegate:(BBAMLStyleSheetParser *)delegate;
 
 - (IBAction)runAnimation:(id)sender;
 

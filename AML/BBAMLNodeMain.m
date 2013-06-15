@@ -10,10 +10,4 @@
 
 @implementation BBAMLNodeMain
 
-- (UIView *)view {
-    [super view];
-    [self fullScreenWithPriority:1000];
-    return self.nodeView;
-}
-
 @end

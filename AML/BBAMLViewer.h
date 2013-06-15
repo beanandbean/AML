@@ -15,7 +15,7 @@
 @interface BBAMLViewer : NSObject <NSXMLParserDelegate>
 
 @property (weak, nonatomic) id delegate;
-@property (weak, nonatomic) UIView *parent;
+@property (weak, nonatomic) UIView *parentView;
 
 @property (strong, nonatomic) UIView *rootView;
 @property (strong, nonatomic) BBAMLNodeRoot *root;
@@ -24,6 +24,7 @@
 - (id)initWithAMLData:(NSData *)filename andDelegate:(id)delegate andParentView:(UIView *)parent;
 
 - (void)view;
+- (void)removeView;
 
 - (BBAMLDocumentNode *)getElementById:(NSString *)nodeId;
 - (NSArray *)getElementsByPattern:(NSString *)pattern;

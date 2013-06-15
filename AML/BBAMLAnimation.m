@@ -10,6 +10,8 @@
 
 @interface BBAMLAnimation ()
 
+@property (nonatomic) float duration;
+
 @property (weak, nonatomic) BBAMLStyleSheetParser *delegate;
 
 @property (strong, nonatomic) NSString *styleSheet;
@@ -18,17 +20,18 @@
 
 @implementation BBAMLAnimation
 
-- (id)initWithAnimationStyleSheet:(NSString *)styleSheet andDelegate:(BBAMLStyleSheetParser *)delegate {
+- (id)initWithAnimationStyleSheet:(NSString *)styleSheet duration:(float)duration andDelegate:(BBAMLStyleSheetParser *)delegate {
     self = [super init];
     if (self) {
         self.delegate = delegate;
+        self.duration = duration;
         self.styleSheet = styleSheet;
     }
     return self;
 }
 
 - (void)runAnimation:(id)sender {
-    [UIView animateWithDuration:1.0 animations:^{
+    [UIView animateWithDuration:self.duration animations:^{
         [self.delegate parseStyleSheet:self.styleSheet];
     }];
 }

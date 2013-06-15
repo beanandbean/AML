@@ -42,4 +42,12 @@
     NSLog(@"!");
 }
 
+- (IBAction)reload:(id)sender {
+    [self.amlViewer removeView];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"aml"];
+    NSData *data = [NSData dataWithContentsOfFile:path options:0 error:nil];
+    self.amlViewer = [[BBAMLViewer alloc] initWithAMLData:data andDelegate:self andParentView:self.view];
+    [self.amlViewer view];
+}
+
 @end

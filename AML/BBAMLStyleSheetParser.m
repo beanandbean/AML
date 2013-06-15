@@ -27,7 +27,7 @@
 
 - (void)setStyle:(NSString *)style forProperty:(NSString *)property onObject:(BBAMLDocumentNode *)node;
 
-- (void)addTargetOnObject:(BBAMLDocumentNode *)node andAction:(NSString *)action andControlEvent:(int)controlEvent;
+- (void)addTargetOnObject:(BBAMLDocumentNode *)node withAction:(NSString *)action andControlEvent:(int)controlEvent;
 
 - (NSLayoutConstraint *)constraintForStyle:(NSString *)style forProperty:(int)property onObject:(BBAMLDocumentNode *)node withPriority:(int)priority;
 
@@ -90,8 +90,19 @@
     if ([pattern characterAtIndex:0] == '@') {
         pattern = [pattern substringFromIndex:1];
         if ([[pattern substringToIndex:10] isEqualToString:@"animation "]) {
-            NSString *animationName = [[pattern substringFromIndex:10] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            [self.animations setObject:[[BBAMLAnimation alloc] initWithAnimationStyleSheet:style andDelegate:self] forKey:animationName];
+            NSString *animationDetail = [[pattern substringFromIndex:10] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSRange range = [animationDetail rangeOfCharacterFromSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            float duration = 1.0;
+            NSString *animationName;
+            if (range.location == NSNotFound) {
+                animationName = animationDetail;
+            } else {
+                animationName = [[animationDetail substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                NSString *animationDuration = [[animationDetail substringFromIndex:range.location + 1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                duration = [animationDuration floatValue];
+                duration = duration == 0.0 ? 1.0 : duration;
+            }
+            [self.animations setObject:[[BBAMLAnimation alloc] initWithAnimationStyleSheet:style duration:duration andDelegate:self] forKey:animationName];
         }
     } else {
         NSArray *nodes = [self.root getElementsByPattern:pattern];
@@ -148,7 +159,7 @@
         if (layoutAttribute != NSLayoutAttributeNotAnAttribute) {
             [self.root.nodeView addConstraint:[self constraintForStyle:style forProperty:layoutAttribute onObject:node withPriority:priority]];
         } else if (controlEvent != -1) {
-            [self addTargetOnObject:node andAction:style andControlEvent:controlEvent];
+            [self addTargetOnObject:node withAction:style andControlEvent:controlEvent];
         } else if ([property isEqualToString:@"backgroundColor"]) {
             [node setBackgroundColor:[BBAMLStyleSheetParser colorForStyle:style]];
         } else if ([property isEqualToString:@"textColor"]) {
@@ -163,7 +174,7 @@
     }
 }
 
-- (void)addTargetOnObject:(BBAMLDocumentNode *)node andAction:(NSString *)action andControlEvent:(int)controlEvent {
+- (void)addTargetOnObject:(BBAMLDocumentNode *)node withAction:(NSString *)action andControlEvent:(int)controlEvent {
     if ([action characterAtIndex:0] == '@') {
         NSString *actionMethod = [[action substringFromIndex:1] stringByAppendingString:@":"];
         SEL selector = NSSelectorFromString(actionMethod);

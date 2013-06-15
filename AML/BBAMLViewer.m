@@ -17,7 +17,8 @@
 @property (weak, nonatomic) BBAMLDocumentNode *current;
 
 @property (strong, nonatomic) NSData *data;
-@property (strong, nonatomic) NSXMLParser *parser;
+@property (strong, nonatomic) NSXMLParser *xmlParser;
+@property (strong, nonatomic) NSArray *fullScreenConstraints;
 @property (strong, nonatomic) BBAMLStyleSheetParser *styleSheetParser;
 
 @end
@@ -28,23 +29,68 @@
     self = [super init];
     if (self) {
         self.delegate = delegate;
-        self.parent = parent;
+        self.parentView = parent;
         self.data = data;
-        self.parser = [[NSXMLParser alloc] initWithData:data];
-        self.parser.delegate = self;
-        self.parser.shouldProcessNamespaces = NO;
+        self.xmlParser = [[NSXMLParser alloc] initWithData:data];
+        self.xmlParser.delegate = self;
+        self.xmlParser.shouldProcessNamespaces = NO;
     }
     return self;
 }
 
 - (void)view {
-    [self.parser parse];
+    [self.xmlParser parse];
     self.rootView = [self.root view];
     if (self.rootView) {
-        [self.parent addSubview:self.rootView];
+        [self.parentView addSubview:self.rootView];
+        NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:self.rootView
+                                                                          attribute:NSLayoutAttributeLeft
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.parentView
+                                                                          attribute:NSLayoutAttributeLeft
+                                                                         multiplier:1.0
+                                                                           constant:0.0];
+        leftConstraint.priority = 1000;
+        [self.parentView addConstraint:leftConstraint];
+        NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.rootView
+                                                                           attribute:NSLayoutAttributeRight
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.parentView
+                                                                           attribute:NSLayoutAttributeRight
+                                                                          multiplier:1.0
+                                                                            constant:0.0];
+        rightConstraint.priority = 1000;
+        [self.parentView addConstraint:rightConstraint];
+        NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:self.rootView
+                                                                         attribute:NSLayoutAttributeTop
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.parentView
+                                                                         attribute:NSLayoutAttributeTop
+                                                                        multiplier:1.0
+                                                                          constant:0.0];
+        topConstraint.priority = 1000;
+        [self.parentView addConstraint:topConstraint];
+        NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.rootView
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self.parentView
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                           multiplier:1.0
+                                                                             constant:0.0];
+        bottomConstraint.priority = 1000;
+        [self.parentView addConstraint:bottomConstraint];
+        self.fullScreenConstraints = [NSArray arrayWithObjects:leftConstraint, rightConstraint, topConstraint, bottomConstraint, nil];
     }
     self.styleSheetParser = [[BBAMLStyleSheetParser alloc] initWithAMLViewer:self];
     [self.styleSheetParser parse];
+}
+
+- (void)removeView {
+    if ([self.rootView isDescendantOfView:self.parentView]) {
+        [self.parentView removeConstraints:self.fullScreenConstraints];
+        [self.rootView removeFromSuperview];
+        [self.parentView layoutIfNeeded];
+    }
 }
 
 - (BBAMLDocumentNode *)getElementById:(NSString *)nodeId {
@@ -79,3 +125,4 @@
 }
 
 @end
+
