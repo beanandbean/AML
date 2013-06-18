@@ -15,6 +15,8 @@
 		2C3900E7173E4E6000561DB4 /* BBAMLNodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */; };
 		2C479EA7173F554900B53553 /* BBAMLStyleSheetParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */; };
 		2C8A423E176FF72E00C7CF66 /* BBAMLOperationEnd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A423D176FF72D00C7CF66 /* BBAMLOperationEnd.m */; };
+		2C8A4241176FFDCA00C7CF66 /* BBAMLOperationBracketBegin.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A4240176FFDCA00C7CF66 /* BBAMLOperationBracketBegin.m */; };
+		2C8A4244176FFF0C00C7CF66 /* BBAMLOperationBracketEnd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A4243176FFF0C00C7CF66 /* BBAMLOperationBracketEnd.m */; };
 		2C8F7CCA176F123F0091DFF1 /* BBAMLOperationMinus.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F7CC9176F123F0091DFF1 /* BBAMLOperationMinus.m */; };
 		2C8F7CCD176F16E70091DFF1 /* BBAMLOperationMultiply.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F7CCC176F16E70091DFF1 /* BBAMLOperationMultiply.m */; };
 		2C8F7CD0176F1E530091DFF1 /* BBAMLOperationDivide.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F7CCF176F1E530091DFF1 /* BBAMLOperationDivide.m */; };
@@ -60,6 +62,10 @@
 		2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLStyleSheetParser.m; sourceTree = "<group>"; };
 		2C8A423C176FF72D00C7CF66 /* BBAMLOperationEnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationEnd.h; sourceTree = "<group>"; };
 		2C8A423D176FF72D00C7CF66 /* BBAMLOperationEnd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationEnd.m; sourceTree = "<group>"; };
+		2C8A423F176FFDCA00C7CF66 /* BBAMLOperationBracketBegin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationBracketBegin.h; sourceTree = "<group>"; };
+		2C8A4240176FFDCA00C7CF66 /* BBAMLOperationBracketBegin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationBracketBegin.m; sourceTree = "<group>"; };
+		2C8A4242176FFF0C00C7CF66 /* BBAMLOperationBracketEnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationBracketEnd.h; sourceTree = "<group>"; };
+		2C8A4243176FFF0C00C7CF66 /* BBAMLOperationBracketEnd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationBracketEnd.m; sourceTree = "<group>"; };
 		2C8F7CC8176F123F0091DFF1 /* BBAMLOperationMinus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationMinus.h; sourceTree = "<group>"; };
 		2C8F7CC9176F123F0091DFF1 /* BBAMLOperationMinus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationMinus.m; sourceTree = "<group>"; };
 		2C8F7CCB176F16E70091DFF1 /* BBAMLOperationMultiply.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationMultiply.h; sourceTree = "<group>"; };
@@ -169,6 +175,10 @@
 				2C8F7CCF176F1E530091DFF1 /* BBAMLOperationDivide.m */,
 				2C8A423C176FF72D00C7CF66 /* BBAMLOperationEnd.h */,
 				2C8A423D176FF72D00C7CF66 /* BBAMLOperationEnd.m */,
+				2C8A423F176FFDCA00C7CF66 /* BBAMLOperationBracketBegin.h */,
+				2C8A4240176FFDCA00C7CF66 /* BBAMLOperationBracketBegin.m */,
+				2C8A4242176FFF0C00C7CF66 /* BBAMLOperationBracketEnd.h */,
+				2C8A4243176FFF0C00C7CF66 /* BBAMLOperationBracketEnd.m */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -339,6 +349,8 @@
 				2C8F7CCD176F16E70091DFF1 /* BBAMLOperationMultiply.m in Sources */,
 				2C8F7CD0176F1E530091DFF1 /* BBAMLOperationDivide.m in Sources */,
 				2C8A423E176FF72E00C7CF66 /* BBAMLOperationEnd.m in Sources */,
+				2C8A4241176FFDCA00C7CF66 /* BBAMLOperationBracketBegin.m in Sources */,
+				2C8A4244176FFF0C00C7CF66 /* BBAMLOperationBracketEnd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

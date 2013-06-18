@@ -1,0 +1,75 @@
+<aml>
+  <style>
+    @animation ani {
+      view {
+        @priority: 1000;
+        height: 400;
+        backgroundColor: black;
+        left: $(main).centerX-200;
+      }
+      input {
+        @priority: 1000;
+        left: $(parent).left+30;
+        centerY: $(parent).centerY+50
+        backgroundColor: #00FF00;
+      }
+    }
+    view {
+      backgroundColor: #FF0000;
+      width: 500;
+      height: 500;
+      left: $(main).left+150;
+      top: $(main).top+50;
+    }
+    input {
+      left: $(parent).left+10;
+      centerY: $(parent).centerY-10;
+      backgroundColor: gray;
+      height: 100;
+    }
+    label {
+      left: $(parent).left+20;
+      bottom: $(parent).bottom-20;
+    }
+    #testId {
+      bottom: $(main).bottom-30;
+      right: $(main).right-30;
+      width: 200 !1000;
+      left: $(main).left !700;
+    }
+    #testId {
+      @priority: 1000;
+      right: $(main).right-50;
+      touchUpInside: ani;
+    }
+    #move {
+      top: $(input).bottom;
+      left: $(input).right+10;
+      right: $(parent).right-10;
+      width: $(input).width;
+      height: 100;
+      touchUpInside: @calculate;
+    }
+    .b {
+      backgroundColor: green;
+      textColor: gray;
+    }
+    #reload {
+      @priority: 1000;
+      left: $(main).left+20;
+      top: $(main).top+20;
+      backgroundColor: black;
+      textColor: white;
+      touchUpInside: @reload;
+    }
+  </style>
+  <main>
+    <button id="reload">RELOAD</button>
+    <button id="testId" class="b">New text here!</button>
+    <label>Wow!</label>
+    <view>
+      <input id="input">A new Text!</input>
+      <button id="move" class="b">Text here!</button>
+    </view>
+  </main>
+</aml>

@@ -18,6 +18,8 @@
 #import "BBAMLOperationMinus.h"
 #import "BBAMLOperationMultiply.h"
 #import "BBAMLOperationDivide.h"
+#import "BBAMLOperationBracketBegin.h"
+#import "BBAMLOperationBracketEnd.h"
 
 @interface BBAMLCalculator ()
 
@@ -78,6 +80,14 @@
                     operation = [[BBAMLOperationEnd alloc] init];
                     break;
                     
+                case '(':
+                    operation = [[BBAMLOperationBracketBegin alloc] init];
+                    break;
+                    
+                case ')':
+                    operation = [[BBAMLOperationBracketEnd alloc] init];
+                    break;
+                    
                 default:
                     break;
             }
@@ -89,13 +99,15 @@
                     [self.objects.lastObject addObject:result];
                 }
                 [self.operations addObject:operation];
+                NSMutableArray *objectLayer = [NSMutableArray array];
                 if (operation.needPrecedingObject) {
                     id<BBAMLObjectType> precedingObject = ((NSMutableArray *)self.objects.lastObject).lastObject;
-                    [self.objects.lastObject removeLastObject];
-                    [self.objects addObject:[NSMutableArray arrayWithObject:precedingObject]];
-                } else {
-                    [self.objects addObject:[NSMutableArray array]];
+                    if (precedingObject) {
+                        [self.objects.lastObject removeLastObject];
+                        [objectLayer addObject:precedingObject];
+                    }
                 }
+                [self.objects addObject:objectLayer];
             }
         }
     }

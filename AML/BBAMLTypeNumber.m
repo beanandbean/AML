@@ -29,7 +29,7 @@
 }
 
 - (NSString *)stringValue {
-    return [NSString stringWithFormat:@"%f", self.value];
+    return [NSString stringWithFormat:@"%g", self.value];
 }
 
 - (float)floatValue {

@@ -28,12 +28,10 @@
 {
     [super viewDidLoad];
     
-    /*NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"aml"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"aml"];
     NSData *data = [NSData dataWithContentsOfFile:path options:0 error:nil];
     self.amlViewer = [[BBAMLViewer alloc] initWithAMLData:data andDelegate:self andParentView:self.view];
-    [self.amlViewer view];*/
-    
-    NSLog(@"%@", [[BBAMLCalculator calculateExpression:@"1 + 10 * 10 - 2"] stringValue]);
+    [self.amlViewer view];
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,9 +40,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-- (IBAction)test:(id)sender {
-    NSLog(@"!");
+- (IBAction)calculate:(id)sender {
+    UITextField *field = (UITextField *)[self.amlViewer getElementById:@"input"].nodeView;
+    field.text = [[BBAMLCalculator calculateExpression:field.text] stringValue];
 }
 
 - (IBAction)reload:(id)sender {
@@ -54,6 +52,5 @@
     self.amlViewer = [[BBAMLViewer alloc] initWithAMLData:data andDelegate:self andParentView:self.view];
     [self.amlViewer view];
 }
- */
 
 @end
