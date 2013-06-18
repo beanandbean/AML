@@ -12,6 +12,9 @@
 
 @protocol BBAMLOperation <NSObject>
 
+- (int)priority;
+- (bool)needPrecedingObject;
+
 - (id<BBAMLObjectType>)operateWithArray:(NSArray *)array;
 
 @end

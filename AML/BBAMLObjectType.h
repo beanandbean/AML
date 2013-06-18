@@ -11,7 +11,17 @@
 @protocol BBAMLObjectType <NSObject>
 
 - (id)initWithString:(NSString *)string;
+- (id)initWithFloat:(float)floatValue;
 
 - (NSString *)stringValue;
+- (float)floatValue;
+
+- (id<BBAMLObjectType>)negativeObject;
+- (id<BBAMLObjectType>)reciprocalObject;
+
+- (id<BBAMLObjectType>)objectAdding:(id<BBAMLObjectType>)object;
+- (id<BBAMLObjectType>)objectMinusing:(id<BBAMLObjectType>)object;
+- (id<BBAMLObjectType>)objectMultiplying:(id<BBAMLObjectType>)object;
+- (id<BBAMLObjectType>)objectDividing:(id<BBAMLObjectType>)object;
 
 @end

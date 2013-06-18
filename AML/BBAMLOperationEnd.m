@@ -1,19 +1,19 @@
 //
-//  BBAMLOperationNone.m
+//  BBAMLOperationEnd.m
 //  AML
 //
-//  Created by wangsw on 6/16/13.
+//  Created by wangsw on 6/18/13.
 //  Copyright (c) 2013 beanandbean. All rights reserved.
 //
 
-#import "BBAMLOperationNone.h"
+#import "BBAMLOperationEnd.h"
 
 #import "BBAMLTypeNone.h"
 
-@implementation BBAMLOperationNone
+@implementation BBAMLOperationEnd
 
 - (int)priority {
-    return -1000;
+    return -100;
 }
 
 - (bool)needPrecedingObject {

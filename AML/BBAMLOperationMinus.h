@@ -1,8 +1,8 @@
 //
-//  BBAMLOperationPositive.h
+//  BBAMLOperationMinus.h
 //  AML
 //
-//  Created by wangsw on 6/16/13.
+//  Created by wangsw on 6/17/13.
 //  Copyright (c) 2013 beanandbean. All rights reserved.
 //
 
@@ -10,6 +10,6 @@
 
 #import "BBAMLOperation.h"
 
-@interface BBAMLOperationPlus : NSObject <BBAMLOperation>
+@interface BBAMLOperationMinus : NSObject <BBAMLOperation>
 
 @end

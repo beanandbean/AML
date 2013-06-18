@@ -1,5 +1,5 @@
 //
-//  BBAMLTypeNumber.h
+//  BBAMLOperationPositive.h
 //  AML
 //
 //  Created by wangsw on 6/16/13.
@@ -8,10 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BBAMLObjectType.h"
+#import "BBAMLOperation.h"
 
-@interface BBAMLTypeNumber : NSObject <BBAMLObjectType>
-
-@property (nonatomic) float value;
+@interface BBAMLOperationAdd : NSObject <BBAMLOperation>
 
 @end

@@ -14,9 +14,13 @@
 		2C3900E4173E4E5300561DB4 /* BBAMLNodeInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900E3173E4E5300561DB4 /* BBAMLNodeInput.m */; };
 		2C3900E7173E4E6000561DB4 /* BBAMLNodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */; };
 		2C479EA7173F554900B53553 /* BBAMLStyleSheetParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */; };
+		2C8A423E176FF72E00C7CF66 /* BBAMLOperationEnd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8A423D176FF72D00C7CF66 /* BBAMLOperationEnd.m */; };
+		2C8F7CCA176F123F0091DFF1 /* BBAMLOperationMinus.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F7CC9176F123F0091DFF1 /* BBAMLOperationMinus.m */; };
+		2C8F7CCD176F16E70091DFF1 /* BBAMLOperationMultiply.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F7CCC176F16E70091DFF1 /* BBAMLOperationMultiply.m */; };
+		2C8F7CD0176F1E530091DFF1 /* BBAMLOperationDivide.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F7CCF176F1E530091DFF1 /* BBAMLOperationDivide.m */; };
 		2C9FB24E176DC2A700F9A7D2 /* BBAMLCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9FB24D176DC2A700F9A7D2 /* BBAMLCalculator.m */; };
 		2C9FB253176DC3A000F9A7D2 /* BBAMLTypeNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9FB252176DC3A000F9A7D2 /* BBAMLTypeNumber.m */; };
-		2C9FB25A176DCB1800F9A7D2 /* BBAMLOperationPlus.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9FB259176DCB1800F9A7D2 /* BBAMLOperationPlus.m */; };
+		2C9FB25A176DCB1800F9A7D2 /* BBAMLOperationAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9FB259176DCB1800F9A7D2 /* BBAMLOperationAdd.m */; };
 		2C9FB25D176DCBDA00F9A7D2 /* BBAMLOperationNone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9FB25C176DCBDA00F9A7D2 /* BBAMLOperationNone.m */; };
 		2C9FB260176DCC8A00F9A7D2 /* BBAMLTypeNone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9FB25F176DCC8A00F9A7D2 /* BBAMLTypeNone.m */; };
 		2CA302F717674E20005C5CE6 /* BBAMLAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA302F617674E20005C5CE6 /* BBAMLAnimation.m */; };
@@ -54,14 +58,22 @@
 		2C3900E6173E4E6000561DB4 /* BBAMLNodeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLNodeButton.m; sourceTree = "<group>"; };
 		2C479EA5173F554900B53553 /* BBAMLStyleSheetParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLStyleSheetParser.h; sourceTree = "<group>"; };
 		2C479EA6173F554900B53553 /* BBAMLStyleSheetParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLStyleSheetParser.m; sourceTree = "<group>"; };
+		2C8A423C176FF72D00C7CF66 /* BBAMLOperationEnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationEnd.h; sourceTree = "<group>"; };
+		2C8A423D176FF72D00C7CF66 /* BBAMLOperationEnd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationEnd.m; sourceTree = "<group>"; };
+		2C8F7CC8176F123F0091DFF1 /* BBAMLOperationMinus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationMinus.h; sourceTree = "<group>"; };
+		2C8F7CC9176F123F0091DFF1 /* BBAMLOperationMinus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationMinus.m; sourceTree = "<group>"; };
+		2C8F7CCB176F16E70091DFF1 /* BBAMLOperationMultiply.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationMultiply.h; sourceTree = "<group>"; };
+		2C8F7CCC176F16E70091DFF1 /* BBAMLOperationMultiply.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationMultiply.m; sourceTree = "<group>"; };
+		2C8F7CCE176F1E530091DFF1 /* BBAMLOperationDivide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationDivide.h; sourceTree = "<group>"; };
+		2C8F7CCF176F1E530091DFF1 /* BBAMLOperationDivide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationDivide.m; sourceTree = "<group>"; };
 		2C9FB24C176DC2A700F9A7D2 /* BBAMLCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLCalculator.h; sourceTree = "<group>"; };
 		2C9FB24D176DC2A700F9A7D2 /* BBAMLCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLCalculator.m; sourceTree = "<group>"; };
 		2C9FB250176DC38200F9A7D2 /* BBAMLObjectType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BBAMLObjectType.h; sourceTree = "<group>"; };
 		2C9FB251176DC3A000F9A7D2 /* BBAMLTypeNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLTypeNumber.h; sourceTree = "<group>"; };
 		2C9FB252176DC3A000F9A7D2 /* BBAMLTypeNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLTypeNumber.m; sourceTree = "<group>"; };
 		2C9FB256176DCAF000F9A7D2 /* BBAMLOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BBAMLOperation.h; sourceTree = "<group>"; };
-		2C9FB258176DCB1800F9A7D2 /* BBAMLOperationPlus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationPlus.h; sourceTree = "<group>"; };
-		2C9FB259176DCB1800F9A7D2 /* BBAMLOperationPlus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationPlus.m; sourceTree = "<group>"; };
+		2C9FB258176DCB1800F9A7D2 /* BBAMLOperationAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationAdd.h; sourceTree = "<group>"; };
+		2C9FB259176DCB1800F9A7D2 /* BBAMLOperationAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationAdd.m; sourceTree = "<group>"; };
 		2C9FB25B176DCBDA00F9A7D2 /* BBAMLOperationNone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationNone.h; sourceTree = "<group>"; };
 		2C9FB25C176DCBDA00F9A7D2 /* BBAMLOperationNone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationNone.m; sourceTree = "<group>"; };
 		2C9FB25E176DCC8A00F9A7D2 /* BBAMLTypeNone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLTypeNone.h; sourceTree = "<group>"; };
@@ -145,10 +157,18 @@
 		2C9FB257176DCAF500F9A7D2 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				2C9FB258176DCB1800F9A7D2 /* BBAMLOperationPlus.h */,
-				2C9FB259176DCB1800F9A7D2 /* BBAMLOperationPlus.m */,
+				2C9FB258176DCB1800F9A7D2 /* BBAMLOperationAdd.h */,
+				2C9FB259176DCB1800F9A7D2 /* BBAMLOperationAdd.m */,
 				2C9FB25B176DCBDA00F9A7D2 /* BBAMLOperationNone.h */,
 				2C9FB25C176DCBDA00F9A7D2 /* BBAMLOperationNone.m */,
+				2C8F7CC8176F123F0091DFF1 /* BBAMLOperationMinus.h */,
+				2C8F7CC9176F123F0091DFF1 /* BBAMLOperationMinus.m */,
+				2C8F7CCB176F16E70091DFF1 /* BBAMLOperationMultiply.h */,
+				2C8F7CCC176F16E70091DFF1 /* BBAMLOperationMultiply.m */,
+				2C8F7CCE176F1E530091DFF1 /* BBAMLOperationDivide.h */,
+				2C8F7CCF176F1E530091DFF1 /* BBAMLOperationDivide.m */,
+				2C8A423C176FF72D00C7CF66 /* BBAMLOperationEnd.h */,
+				2C8A423D176FF72D00C7CF66 /* BBAMLOperationEnd.m */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -312,9 +332,13 @@
 				2CA302F717674E20005C5CE6 /* BBAMLAnimation.m in Sources */,
 				2C9FB24E176DC2A700F9A7D2 /* BBAMLCalculator.m in Sources */,
 				2C9FB253176DC3A000F9A7D2 /* BBAMLTypeNumber.m in Sources */,
-				2C9FB25A176DCB1800F9A7D2 /* BBAMLOperationPlus.m in Sources */,
+				2C9FB25A176DCB1800F9A7D2 /* BBAMLOperationAdd.m in Sources */,
 				2C9FB25D176DCBDA00F9A7D2 /* BBAMLOperationNone.m in Sources */,
 				2C9FB260176DCC8A00F9A7D2 /* BBAMLTypeNone.m in Sources */,
+				2C8F7CCA176F123F0091DFF1 /* BBAMLOperationMinus.m in Sources */,
+				2C8F7CCD176F16E70091DFF1 /* BBAMLOperationMultiply.m in Sources */,
+				2C8F7CD0176F1E530091DFF1 /* BBAMLOperationDivide.m in Sources */,
+				2C8A423E176FF72E00C7CF66 /* BBAMLOperationEnd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
