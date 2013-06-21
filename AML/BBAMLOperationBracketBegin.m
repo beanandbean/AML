@@ -18,6 +18,8 @@ static bool recentlyOperated = NO;
 
 @implementation BBAMLOperationBracketBegin
 
+@synthesize preceding, objects;
+
 + (bool)recentlyOperated {
     bool answer = recentlyOperated;
     recentlyOperated = NO;
@@ -27,6 +29,7 @@ static bool recentlyOperated = NO;
 - (id)init {
     self = [super init];
     if (self) {
+        self.objects = [NSMutableArray array];
         self.isFirstToAskPriority = YES;
     }
     return self;
@@ -41,13 +44,9 @@ static bool recentlyOperated = NO;
     }
 }
 
-- (bool)needPrecedingObject {
-    return NO;
-}
-
-- (id<BBAMLObjectType>)operateWithArray:(NSArray *)array {
+- (id<BBAMLObjectType>)operate {
     recentlyOperated = YES;
-    return [array objectAtIndex:0];
+    return [self.objects objectAtIndex:0];
 }
 
 @end

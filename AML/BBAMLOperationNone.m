@@ -12,15 +12,21 @@
 
 @implementation BBAMLOperationNone
 
+@synthesize preceding, objects;
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.objects = [NSMutableArray array];
+    }
+    return self;
+}
+
 - (int)priority {
     return -1000;
 }
 
-- (bool)needPrecedingObject {
-    return NO;
-}
-
-- (id<BBAMLObjectType>)operateWithArray:(NSArray *)array {
+- (id<BBAMLObjectType>)operate {
     return [[BBAMLTypeNone alloc] init];
 }
 

@@ -12,19 +12,27 @@
 
 @implementation BBAMLOperationMinus
 
+@synthesize preceding, objects;
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.objects = [NSMutableArray array];
+    }
+    return self;
+}
+
 - (int)priority {
     return 10;
 }
 
-- (bool)needPrecedingObject {
-    return YES;
-}
-
-- (id<BBAMLObjectType>)operateWithArray:(NSArray *)array {
-    if (array.count == 1) {
-        return [[array objectAtIndex:0] negativeObject];
-    } else if (array.count == 2) {
-        return [[array objectAtIndex:0] objectMinusing:[array objectAtIndex:1]];
+- (id<BBAMLObjectType>)operate {
+    if (self.objects.count == 1) {
+        if (self.preceding) {
+            return [self.preceding objectMinusing:[self.objects objectAtIndex:0]];
+        } else {
+            return [[self.objects objectAtIndex:0] negativeObject];
+        }
     } else {
         return [[BBAMLTypeNone alloc] init];
     }

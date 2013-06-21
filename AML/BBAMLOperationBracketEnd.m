@@ -18,9 +18,12 @@
 
 @implementation BBAMLOperationBracketEnd
 
+@synthesize preceding, objects;
+
 - (id)init {
     self = [super init];
     if (self) {
+        self.objects = [NSMutableArray array];
         self.isAboveBracketBegin = YES;
     }
     return self;
@@ -37,12 +40,8 @@
     }
 }
 
-- (bool)needPrecedingObject {
-    return YES;
-}
-
-- (id<BBAMLObjectType>)operateWithArray:(NSArray *)array {
-    return [array objectAtIndex:0];
+- (id<BBAMLObjectType>)operate {
+    return self.preceding;
 }
 
 @end

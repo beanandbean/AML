@@ -12,17 +12,23 @@
 
 @implementation BBAMLOperationDivide
 
+@synthesize preceding, objects;
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.objects = [NSMutableArray array];
+    }
+    return self;
+}
+
 - (int)priority {
     return 20;
 }
 
-- (bool)needPrecedingObject {
-    return YES;
-}
-
-- (id<BBAMLObjectType>)operateWithArray:(NSArray *)array {
-    if (array.count == 2) {
-        return [[array objectAtIndex:0] objectDividing:[array objectAtIndex:1]];
+- (id<BBAMLObjectType>)operate {
+    if (self.objects.count == 1 && self.preceding) {
+        return [self.preceding objectDividing:[self.objects objectAtIndex:0]];
     } else {
         return [[BBAMLTypeNone alloc] init];
     }

@@ -12,9 +12,11 @@
 
 @protocol BBAMLOperation <NSObject>
 
-- (int)priority;
-- (bool)needPrecedingObject;
+@property (strong, nonatomic) id<BBAMLObjectType> preceding;
+@property (strong, nonatomic) NSMutableArray *objects;
 
-- (id<BBAMLObjectType>)operateWithArray:(NSArray *)array;
+- (int)priority;
+
+- (id<BBAMLObjectType>)operate;
 
 @end

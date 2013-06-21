@@ -24,7 +24,6 @@
 @interface BBAMLCalculator ()
 
 @property (strong, nonatomic) NSMutableArray *operations;
-@property (strong, nonatomic) NSMutableArray *objects;
 
 - (id<BBAMLObjectType>)calculateExpression:(NSString *)expression;
 
@@ -41,12 +40,12 @@
     self = [super init];
     if (self) {
         self.operations = [NSMutableArray arrayWithObject:[[BBAMLOperationNone alloc] init]];
-        self.objects = [NSMutableArray arrayWithObject:[[NSMutableArray alloc] init]];
     }
     return self;
 }
 
 - (id<BBAMLObjectType>)calculateExpression:(NSString *)expression {
+    BBAMLOperationEnd *end;
     NSMutableString *buffer = [NSMutableString string];
     expression = [expression stringByAppendingString:@"="];
     for (int index = 0; index < expression.length; index++) {
@@ -55,7 +54,7 @@
             [buffer appendFormat:@"%c", character];
         } else {
             if (buffer.length) {
-                [self.objects.lastObject addObject:[[BBAMLTypeNumber alloc] initWithString:buffer]];
+                [((id<BBAMLOperation>)self.operations.lastObject).objects addObject:[[BBAMLTypeNumber alloc] initWithString:buffer]];
                 buffer = [NSMutableString string];
             }
             id<BBAMLOperation> operation;
@@ -78,6 +77,7 @@
                     
                 case '=':
                     operation = [[BBAMLOperationEnd alloc] init];
+                    end = operation;
                     break;
                     
                 case '(':
@@ -93,25 +93,20 @@
             }
             if (operation) {
                 while (operation.priority <= ((id<BBAMLOperation>)self.operations.lastObject).priority) {
-                    id<BBAMLObjectType> result = [(id<BBAMLOperation>)self.operations.lastObject operateWithArray:self.objects.lastObject];
-                    [self.objects removeLastObject];
+                    id<BBAMLObjectType> result = [(id<BBAMLOperation>)self.operations.lastObject operate];
                     [self.operations removeLastObject];
-                    [self.objects.lastObject addObject:result];
+                    [((id<BBAMLOperation>)self.operations.lastObject).objects addObject:result];
+                }
+                id<BBAMLObjectType> precedingObject = ((id<BBAMLOperation>)self.operations.lastObject).objects.lastObject;
+                if (precedingObject) {
+                    [((id<BBAMLOperation>)self.operations.lastObject).objects removeLastObject];
+                    operation.preceding = precedingObject;
                 }
                 [self.operations addObject:operation];
-                NSMutableArray *objectLayer = [NSMutableArray array];
-                if (operation.needPrecedingObject) {
-                    id<BBAMLObjectType> precedingObject = ((NSMutableArray *)self.objects.lastObject).lastObject;
-                    if (precedingObject) {
-                        [self.objects.lastObject removeLastObject];
-                        [objectLayer addObject:precedingObject];
-                    }
-                }
-                [self.objects addObject:objectLayer];
             }
         }
     }
-    return [[self.objects objectAtIndex:0] objectAtIndex:0];
+    return end.preceding;
 }
 
 @end
