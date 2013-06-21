@@ -15,10 +15,8 @@
 
 @property (strong, nonatomic) BBAMLViewer *amlViewer;
 
-/*
-- (IBAction)test:(id)sender;
+- (IBAction)calculate:(id)sender;
 - (IBAction)reload:(id)sender;
-*/
 
 @end
 
