@@ -14,6 +14,8 @@
 
 #import "BBAMLOperationNone.h"
 #import "BBAMLOperationEnd.h"
+#import "BBAMLOperationPositive.h"
+#import "BBAMLOperationNegative.h"
 #import "BBAMLOperationAdd.h"
 #import "BBAMLOperationMinus.h"
 #import "BBAMLOperationMultiply.h"
@@ -45,6 +47,7 @@
 }
 
 - (id<BBAMLObjectType>)calculateExpression:(NSString *)expression {
+    id<BBAMLOperation> previousOperation = [[BBAMLOperationEnd alloc] init];
     BBAMLOperationEnd *end;
     NSMutableString *buffer = [NSMutableString string];
     expression = [expression stringByAppendingString:@"="];
@@ -52,6 +55,7 @@
         char character = [expression characterAtIndex:index];
         if ((character >= '0' && character <= '9') || character == '.') {
             [buffer appendFormat:@"%c", character];
+            previousOperation = [[BBAMLOperationNone alloc] init];
         } else {
             if (buffer.length) {
                 [((id<BBAMLOperation>)self.operations.lastObject).objects addObject:[[BBAMLTypeNumber alloc] initWithString:buffer]];
@@ -59,12 +63,25 @@
             }
             id<BBAMLOperation> operation;
             switch (character) {
+                case '=':
+                    operation = [[BBAMLOperationEnd alloc] init];
+                    end = operation;
+                    break;
+                    
                 case '+':
-                    operation = [[BBAMLOperationAdd alloc] init];
+                    if ([previousOperation class] == [BBAMLOperationNone class] || [previousOperation class] == [BBAMLOperationBracketEnd class]) {
+                        operation = [[BBAMLOperationAdd alloc] init];
+                    } else {
+                        operation = [[BBAMLOperationPositive alloc] init];
+                    }
                     break;
                     
                 case '-':
-                    operation = [[BBAMLOperationMinus alloc] init];
+                    if ([previousOperation class] == [BBAMLOperationNone class] || [previousOperation class] == [BBAMLOperationBracketEnd class]) {
+                        operation = [[BBAMLOperationMinus alloc] init];
+                    } else {
+                        operation = [[BBAMLOperationNegative alloc] init];
+                    }
                     break;
                     
                 case '*':
@@ -73,11 +90,6 @@
                     
                 case '/':
                     operation = [[BBAMLOperationDivide alloc] init];
-                    break;
-                    
-                case '=':
-                    operation = [[BBAMLOperationEnd alloc] init];
-                    end = operation;
                     break;
                     
                 case '(':
@@ -103,6 +115,7 @@
                     operation.preceding = precedingObject;
                 }
                 [self.operations addObject:operation];
+                previousOperation = operation;
             }
         }
     }

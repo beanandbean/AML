@@ -26,6 +26,8 @@
 		2C9FB25D176DCBDA00F9A7D2 /* BBAMLOperationNone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9FB25C176DCBDA00F9A7D2 /* BBAMLOperationNone.m */; };
 		2C9FB260176DCC8A00F9A7D2 /* BBAMLTypeNone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9FB25F176DCC8A00F9A7D2 /* BBAMLTypeNone.m */; };
 		2CA302F717674E20005C5CE6 /* BBAMLAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA302F617674E20005C5CE6 /* BBAMLAnimation.m */; };
+		2CAD1E1B1775A849007462E3 /* BBAMLOperationPositive.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD1E1A1775A849007462E3 /* BBAMLOperationPositive.m */; };
+		2CAD1E1E1775A8DA007462E3 /* BBAMLOperationNegative.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD1E1D1775A8DA007462E3 /* BBAMLOperationNegative.m */; };
 		2CAE8850175A168900339539 /* BBAMLConstantDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE884F175A168900339539 /* BBAMLConstantDictionary.m */; };
 		2CB722521747A800009FFFF3 /* BBAMLNodeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB722511747A800009FFFF3 /* BBAMLNodeLabel.m */; };
 		2CE54B60173D1C0400CD4763 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE54B5F173D1C0400CD4763 /* UIKit.framework */; };
@@ -86,6 +88,10 @@
 		2C9FB25F176DCC8A00F9A7D2 /* BBAMLTypeNone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLTypeNone.m; sourceTree = "<group>"; };
 		2CA302F517674E20005C5CE6 /* BBAMLAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLAnimation.h; sourceTree = "<group>"; };
 		2CA302F617674E20005C5CE6 /* BBAMLAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLAnimation.m; sourceTree = "<group>"; };
+		2CAD1E191775A849007462E3 /* BBAMLOperationPositive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationPositive.h; sourceTree = "<group>"; };
+		2CAD1E1A1775A849007462E3 /* BBAMLOperationPositive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationPositive.m; sourceTree = "<group>"; };
+		2CAD1E1C1775A8DA007462E3 /* BBAMLOperationNegative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLOperationNegative.h; sourceTree = "<group>"; };
+		2CAD1E1D1775A8DA007462E3 /* BBAMLOperationNegative.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLOperationNegative.m; sourceTree = "<group>"; };
 		2CAE884E175A168900339539 /* BBAMLConstantDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLConstantDictionary.h; sourceTree = "<group>"; };
 		2CAE884F175A168900339539 /* BBAMLConstantDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBAMLConstantDictionary.m; sourceTree = "<group>"; };
 		2CB722501747A800009FFFF3 /* BBAMLNodeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBAMLNodeLabel.h; sourceTree = "<group>"; };
@@ -179,6 +185,10 @@
 				2C8A4240176FFDCA00C7CF66 /* BBAMLOperationBracketBegin.m */,
 				2C8A4242176FFF0C00C7CF66 /* BBAMLOperationBracketEnd.h */,
 				2C8A4243176FFF0C00C7CF66 /* BBAMLOperationBracketEnd.m */,
+				2CAD1E191775A849007462E3 /* BBAMLOperationPositive.h */,
+				2CAD1E1A1775A849007462E3 /* BBAMLOperationPositive.m */,
+				2CAD1E1C1775A8DA007462E3 /* BBAMLOperationNegative.h */,
+				2CAD1E1D1775A8DA007462E3 /* BBAMLOperationNegative.m */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -351,6 +361,8 @@
 				2C8A423E176FF72E00C7CF66 /* BBAMLOperationEnd.m in Sources */,
 				2C8A4241176FFDCA00C7CF66 /* BBAMLOperationBracketBegin.m in Sources */,
 				2C8A4244176FFF0C00C7CF66 /* BBAMLOperationBracketEnd.m in Sources */,
+				2CAD1E1B1775A849007462E3 /* BBAMLOperationPositive.m in Sources */,
+				2CAD1E1E1775A8DA007462E3 /* BBAMLOperationNegative.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

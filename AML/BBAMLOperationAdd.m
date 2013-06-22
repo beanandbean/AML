@@ -27,12 +27,8 @@
 }
 
 - (id<BBAMLObjectType>)operate {
-    if (self.objects.count == 1) {
-        if (self.preceding) {
-            return [self.preceding objectAdding:[self.objects objectAtIndex:0]];
-        } else {
-            return [self.objects objectAtIndex:0];
-        }
+    if (self.objects.count == 1 && self.preceding) {
+        return [self.preceding objectAdding:[self.objects objectAtIndex:0]];
     } else {
         return [[BBAMLTypeNone alloc] init];
     }
